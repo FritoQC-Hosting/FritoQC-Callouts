@@ -56,6 +56,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Callouts\FightInProgress.cs" />
+    <Compile Include="Callouts\TEMPLATE.cs" />
     <Compile Include="Callouts\GunShotsReported.cs" />
     <Compile Include="Callouts\HitAndRun.cs" />
     <Compile Include="Callouts\IntoxicatedIndividual.cs" />

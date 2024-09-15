@@ -14,6 +14,7 @@ namespace FelixsCallouts
         public static readonly bool HitAndRun = INIFile.ReadBoolean("Callouts", "Hit and Run", true);
         public static readonly bool IntoxicatedIndividual = INIFile.ReadBoolean("Callouts", "Intoxicated Individual", true);
         public static readonly bool PanicButton = INIFile.ReadBoolean("Callouts", "Panic button", true);
+        public static readonly bool FightInProgress = INIFile.ReadBoolean("Callouts", "Fight In Progress", true);
 
         //All keys
 

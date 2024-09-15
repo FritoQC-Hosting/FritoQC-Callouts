@@ -5,14 +5,25 @@ namespace FelixsCallouts.Utility
 {
     internal static class FelixsUtils
     {
+        //RANDOM VEHICLE
         private static readonly List<string> VehicleModels = new List<string>
         {
-            "ADDER",
-            "BUFFALO",
-            "SULTAN",
-            "F620"
-            // Add more vehicle models as needed
+            "ADDER",       // Sports car
+            "BUFFALO",     // Muscle car
+            "SULTAN",      // Sports sedan
+            "F620",        // Sports car
+            "ELEGY",       // Sports car
+            "COMET",       // Sports car
+            "INFERNUS",    // Super car
+            "SENTINEL",    // Sports car
+            "ZENTORNO",    // Super car
+            "WARRENER",    // Compact car
+            "BLISTA",      // Compact car
+            "DILETTANTE",  // Compact car
+            "MANANA",      // Classic car
+            "PRIMO",       // Sedan
         };
+
 
         private static readonly Random Random = new Random(); // Initialize Random instance
 

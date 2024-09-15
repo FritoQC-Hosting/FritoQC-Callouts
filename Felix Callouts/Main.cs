@@ -75,13 +75,13 @@ namespace FelixsCallouts
                                 Game.LogTrivial("====================FELIXSCALLOUTS WARNING====================");
                                 UpToDate = false;
                             }
-                            //else if (curVersion.CompareTo(NewVersion) > 0)
-                            //{
-                            //    Game.LogTrivial("FELIXSCALLOUTS: DETECTED BETA RELEASE. DO NOT REDISTRIBUTE. PLEASE REPORT ALL ISSUES.");
-                            //    Game.DisplayNotification("FELIXSCALLOUTS: ~r~DETECTED BETA RELEASE. ~w~DO NOT REDISTRIBUTE. PLEASE REPORT ALL ISSUES.");
-                            //    UpToDate = true;
-                            //    Beta = true;
-                            //}
+                            else if (curVersion.CompareTo(NewVersion) > 0)
+                            {
+                                Game.LogTrivial("FELIXSCALLOUTS: DETECTED BETA RELEASE. DO NOT REDISTRIBUTE. PLEASE REPORT ALL ISSUES.");
+                                Game.DisplayNotification("FELIXSCALLOUTS: ~r~DETECTED BETA RELEASE. ~w~DO NOT REDISTRIBUTE. PLEASE REPORT ALL ISSUES.");
+                                UpToDate = true;
+                                Beta = true;
+                            }
                             else
                             {
                                 Game.LogTrivial("FELIXSCALLOUTS: Finished Checking Felix's Callouts for Updates.");
@@ -125,19 +125,20 @@ namespace FelixsCallouts
                 STP = false;
             }
 
-            //if (Functions.GetAllUserPlugins().ToList().Any(a => a != null && a.FullName.Contains("CalloutInterface")) == true)
-            //{
-            //    Game.LogTrivial("CalloutInterface is Installed by User.");
-            //    CalloutInterface = true;
-            //}
-            //else
-            //{
-            //    Game.LogTrivial("CalloutInterface is NOT Installed by User.");
-            //    CalloutInterface = false;
-            //}
+            if (Functions.GetAllUserPlugins().ToList().Any(a => a != null && a.FullName.Contains("CalloutInterface")) == true)
+            {
+                Game.LogTrivial("CalloutInterface is Installed by User.");
+                CalloutInterface = true;
+            }
+            else
+            {
+                Game.LogTrivial("CalloutInterface is NOT Installed by User.");
+                CalloutInterface = false;
+            }
 
             //CALLOUTS
             Game.LogTrivial("Started Registering Callouts.");
+
             if (Config.GunShotsReported || !Config.INIFile.Exists()) Functions.RegisterCallout(typeof(Callouts.GunShotsReported));
             if (Config.HitAndRun || !Config.INIFile.Exists()) Functions.RegisterCallout(typeof(Callouts.HitAndRun));
             if (Config.IntoxicatedIndividual || !Config.INIFile.Exists()) Functions.RegisterCallout(typeof(Callouts.IntoxicatedIndividual));
@@ -146,27 +147,14 @@ namespace FelixsCallouts
             Game.LogTrivial("Finished Registering Callouts.");
 
             ////BETA CALLOUTS
-            ////if (Beta)
-            ////{
-            //Game.LogTrivial("Started Registering Beta Callouts.");
-            //if (Config.CitizenArrest || !Config.INIFile.Exists()) Functions.RegisterCallout(typeof(Callouts.CitizenArrest));
-            ////if (Config.DUIReported || !Config.INIFile.Exists()) Functions.RegisterCallout(typeof(Callouts.DUIReported));
-            ////if (Config.StolenMail || !Config.INIFile.Exists()) Functions.RegisterCallout(typeof(Callouts.StolenMail));
-            //if (Config.PedestrianHitByVehicle || !Config.INIFile.Exists()) Functions.RegisterCallout(typeof(Callouts.PedestrianHitByVehicle));
-            ////if (Config.PersonWithWeapon || !Config.INIFile.Exists()) Functions.RegisterCallout(typeof(Callouts.PersonWithWeapon));
-            //Game.LogTrivial("Finished Registering Beta Callouts.");
-            ////}
+            if (Beta)
+            {
+                Game.LogTrivial("Started Registering Beta Callouts.");
 
-            ////INVESTIGATIONS
-            //if (Config.RunInvestigations) //not for now sadge
-            //{
-            //    Game.LogTrivial("Started Registering Investigations.");
-            //    //Functions.RegisterCallout(typeof(Callouts.StolenPoliceHardwareInvestigation)); (uncomment this)
-            //    //Functions.RegisterCallout(typeof(Callouts.MissingPersonsInvestigation));
-            //    Game.LogTrivial("More to come soon!");
-            //    Game.LogTrivial("Finished Registering Investigations.");
-            //}
-            //Game.LogTrivial("==========YOBBINCALLOUTS INFORMATION==========");
+                if (Config.FightInProgress || !Config.INIFile.Exists()) Functions.RegisterCallout(typeof(Callouts.FightInProgress));
+
+                Game.LogTrivial("Finished Registering Beta Callouts.");
+            }
         }
     }
 }
