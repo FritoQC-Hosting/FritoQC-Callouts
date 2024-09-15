@@ -6,6 +6,7 @@ using LSPD_First_Response.Mod.API;
 using LSPD_First_Response.Mod.Callouts;
 using System.Drawing;
 using CalloutInterfaceAPI;
+using FelixsCallouts.Utility;
 
 namespace FelixsCallouts.Callouts
 {
@@ -22,12 +23,22 @@ namespace FelixsCallouts.Callouts
         private Vector3 Spawnpoint;
         private bool PursuitCreated;
 
+        //private static readonly Random random = new Random(); // Initialize the Random instance
+        //private static readonly List<string> VehicleModels = new List<string>
+        //{
+        //    "ADDER",
+        //    "BUFFALO",
+        //    "SULTAN",
+        //    "F620"
+        //    // Add more vehicle models as needed
+        //};
+
         public override bool OnBeforeCalloutDisplayed()
         {
             Spawnpoint = World.GetNextPositionOnStreet(Game.LocalPlayer.Character.Position.Around(1000f));
             ShowCalloutAreaBlipBeforeAccepting(Spawnpoint, 30f);
             AddMinimumDistanceCheck(30f, Spawnpoint);
-            CalloutMessage = "Hit and Run";
+            CalloutMessage = "Hit and Run Vehicle spotted in the area.";
             CalloutPosition = Spawnpoint;
             LSPD_First_Response.Mod.API.Functions.PlayScannerAudioUsingPosition("WE_HAVE CRIME_RESISTING_ARREST_02 IN_OR_ON_POSITION", Spawnpoint);
 
@@ -36,7 +47,8 @@ namespace FelixsCallouts.Callouts
 
         public override bool OnCalloutAccepted()
         {
-            SuspectVehicle = new Vehicle("ADDER", Spawnpoint);
+            SuspectVehicle = new Vehicle(FelixsUtils.GetRandomVehicleModel(), Spawnpoint);
+            //SuspectVehicle = new Vehicle(VehicleModels[random.Next(VehicleModels.Count)], Spawnpoint);
             SuspectVehicle.IsPersistent = true;
 
             Suspect = new Ped(SuspectVehicle.GetOffsetPositionFront(5f));
@@ -51,6 +63,9 @@ namespace FelixsCallouts.Callouts
             PursuitCreated = false;
 
             CalloutInterfaceAPI.Functions.SendMessage(this, $"Vehicle is a {CalloutInterfaceAPI.Functions.GetColorName(SuspectVehicle.PrimaryColor)} on {CalloutInterfaceAPI.Functions.GetColorName(SuspectVehicle.SecondaryColor)} {SuspectVehicle.Model.Name}");
+
+            SuspectVehicle.DetachWindscreen();
+            //SuspectVehicle.
 
             return base.OnCalloutAccepted();
         }

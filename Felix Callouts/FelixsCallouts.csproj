@@ -60,13 +60,17 @@
     <Compile Include="Callouts\HitAndRun.cs" />
     <Compile Include="Callouts\IntoxicatedIndividual.cs" />
     <Compile Include="Callouts\PanicButton.cs" />
-    <Compile Include="STP.cs" />
+    <Compile Include="Utility\FelixsUtils.cs" />
+    <Compile Include="Utility\STP.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="ScannerAudio\PANICBUTTON.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="FelixsCallouts.ini" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
