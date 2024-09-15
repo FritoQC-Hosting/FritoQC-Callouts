@@ -21,6 +21,7 @@ namespace FelixsCallouts.Callouts
         private Blip SuspectBlip1;
         private Blip SuspectBlip2;
         private Vector3 Spawnpoint;
+        private bool Notified;
 
         public override bool OnBeforeCalloutDisplayed()
         {
@@ -62,9 +63,13 @@ namespace FelixsCallouts.Callouts
         {
             base.Process();
 
-            if (Game.LocalPlayer.Character.DistanceTo(Suspect1) <= 200f){CalloutInterfaceAPI.Functions.SendMessage(this, "Let dispatch know when to end callout !");}
+            if (Game.LocalPlayer.Character.DistanceTo(Suspect1) <= 200f && !Notified)
+            {
+                CalloutInterfaceAPI.Functions.SendMessage(this, "Let dispatch know when to end callout !");
+                Notified = true;
+            }
 
-            if (Game.LocalPlayer.Character.DistanceTo(Suspect1) <= 100f)
+            if (Game.LocalPlayer.Character.DistanceTo(Suspect1) <= 50f)
             {
                 Suspect1.Tasks.FightAgainst(Suspect2);
                 Suspect2.Tasks.FightAgainst(Suspect1);
