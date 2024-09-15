@@ -108,7 +108,6 @@ namespace FelixsCallouts
             Game.LogTrivial("==========FELIXSCALLOUTS INFORMATION==========");
             Game.LogTrivial("FelixsCallouts by Fruity");
             Game.LogTrivial("Version " + curVersion + "");
-            //Game.LogTrivial("https://yobbinmods.com");
             Game.LogTrivial("Please Join My Discord Server to Report Bugs/Improvements: https://discord.gg/qkmpBJmjJd. Enjoy!");
 
             if (Config.INIFile.Exists()) Game.LogTrivial("FelixsCallouts Config is Installed by User.");
@@ -143,6 +142,7 @@ namespace FelixsCallouts
             if (Config.HitAndRun || !Config.INIFile.Exists()) Functions.RegisterCallout(typeof(Callouts.HitAndRun));
             if (Config.IntoxicatedIndividual || !Config.INIFile.Exists()) Functions.RegisterCallout(typeof(Callouts.IntoxicatedIndividual));
             if (Config.PanicButton || !Config.INIFile.Exists()) Functions.RegisterCallout(typeof(Callouts.PanicButton));
+            if (Config.FightInProgress || !Config.INIFile.Exists()) Functions.RegisterCallout(typeof(Callouts.FightInProgress));
 
             Game.LogTrivial("Finished Registering Callouts.");
 
@@ -151,7 +151,6 @@ namespace FelixsCallouts
             {
                 Game.LogTrivial("Started Registering Beta Callouts.");
 
-                if (Config.FightInProgress || !Config.INIFile.Exists()) Functions.RegisterCallout(typeof(Callouts.FightInProgress));
 
                 Game.LogTrivial("Finished Registering Beta Callouts.");
             }
