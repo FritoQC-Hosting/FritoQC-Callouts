@@ -1,7 +1,4 @@
-﻿// YobbinCallouts by YobB1n
-// * If you actually took the time to read this this, I hope you can learn something :D 
-// * Just know that I'm a terrible programmer with just one high school course as experience, things may be very messy/inneficient.
-// * And messaging me on discord would be way better lol.
+﻿// FritoLays
 
 using System;
 using System.Net;
@@ -16,7 +13,7 @@ namespace FelixsCallouts
     public class Main : Plugin
     {
         public static Version NewVersion = new Version();
-        public static Version curVersion = new Version("2.0");
+        public static Version curVersion = new Version("2.1");
         public static bool STP; //if STP is installed by the user
         public static bool CalloutInterface; //if Callout Interface is installed by the user
         public static bool UpToDate; //if the Plugin is updated.
