@@ -33,16 +33,16 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CalloutInterfaceAPI">
-      <HintPath>..\..\libs\CalloutInterfaceAPI.dll</HintPath>
+      <HintPath>..\..\References\CalloutInterfaceAPI.dll</HintPath>
     </Reference>
     <Reference Include="LSPD First Response">
-      <HintPath>..\..\libs\LSPD First Response.dll</HintPath>
+      <HintPath>..\..\References\LSPD First Response.dll</HintPath>
     </Reference>
     <Reference Include="RagePluginHookSDK">
-      <HintPath>..\..\libs\RagePluginHookSDK.dll</HintPath>
+      <HintPath>..\..\References\RagePluginHookSDK.dll</HintPath>
     </Reference>
     <Reference Include="StopThePed">
-      <HintPath>..\..\libs\StopThePed.dll</HintPath>
+      <HintPath>..\..\References\StopThePed.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -72,9 +72,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="FelixsCallouts.ini" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
