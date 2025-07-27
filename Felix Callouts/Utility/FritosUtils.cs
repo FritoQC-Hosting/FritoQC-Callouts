@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace FelixsCallouts.Utility
+namespace FritosCallouts.Utility
 {
-    internal static class FelixsUtils
+    internal static class FritosUtils
     {
         //RANDOM VEHICLE
         private static readonly List<string> VehicleModels = new List<string>

@@ -3,7 +3,7 @@
 using Rage;
 using System.Windows.Forms;
 
-namespace FelixsCallouts
+namespace FritosCallouts
 {
     internal static class Config
     {
