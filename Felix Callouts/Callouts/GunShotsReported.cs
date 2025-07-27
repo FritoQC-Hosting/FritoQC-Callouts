@@ -6,7 +6,7 @@ using LSPD_First_Response.Mod.API;
 using LSPD_First_Response.Mod.Callouts;
 using CalloutInterfaceAPI;
 
-namespace FelixsCallouts.Callouts
+namespace FritosCallouts.Callouts
 {
     //[CalloutInfo("GunShotsReported", CalloutProbability.High)]
     [CalloutInterface("Gunshots reported", CalloutProbability.High, "Firearm discharged in the area.", "Code 3", "LSPD")]

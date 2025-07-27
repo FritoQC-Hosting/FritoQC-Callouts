@@ -8,7 +8,7 @@ using System.Drawing;
 using CalloutInterfaceAPI;
 using FelixsCallouts.Utility;
 
-namespace FelixsCallouts.Callouts
+namespace FritosCallouts.Callouts
 {
     //[CalloutInfo("HighSpeedChase", CalloutProbability.High)]
     [CalloutInterface("Hit and Run", CalloutProbability.High, "Hit and run vehicle spotted in the area.", "Code 3", "LSPD")]

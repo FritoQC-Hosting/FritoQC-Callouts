@@ -61,7 +61,7 @@
     <Compile Include="Callouts\HitAndRun.cs" />
     <Compile Include="Callouts\IntoxicatedIndividual.cs" />
     <Compile Include="Callouts\PanicButton.cs" />
-    <Compile Include="Utility\FelixsUtils.cs" />
+    <Compile Include="Utility\FritosUtils.cs" />
     <Compile Include="Utility\STP.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="Main.cs" />

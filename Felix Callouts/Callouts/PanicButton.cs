@@ -8,7 +8,7 @@ using System.Threading;
 using CalloutInterfaceAPI;
 using LSPD_First_Response.Mod.Callouts;
 
-namespace FelixsCallouts.Callouts
+namespace FritosCallouts.Callouts
 {
     //[CalloutInfo("PanicButton", CalloutProbability.Low)]
     [CalloutInterface("Panic button pressed", CalloutProbability.Low, "Officer in distress", "Code 3", "LSPD")]

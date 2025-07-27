@@ -8,7 +8,7 @@ using CalloutInterfaceAPI;
 using LSPD_First_Response.Mod.Callouts;
 using Rage.Native;
 
-namespace FelixsCallouts.Callouts
+namespace FritosCallouts.Callouts
 {
     //[CalloutInfo("IntoxicatedIndividual", CalloutProbability.High)]
     [CalloutInterface("Intoxicated Individual", CalloutProbability.High, "Drunk person seen in public.", "Code 2", "LSPD")]

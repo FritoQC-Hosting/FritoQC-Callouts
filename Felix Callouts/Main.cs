@@ -8,7 +8,7 @@ using Rage;
 using System.Linq;
 using LSPD_First_Response.Mod.Callouts;
 
-namespace FelixsCallouts
+namespace FritosCallouts
 {
     public class Main : Plugin
     {
@@ -105,7 +105,7 @@ namespace FelixsCallouts
             Game.LogTrivial("==========FritoQC Callouts INFORMATION==========");
             Game.LogTrivial("FritoQC Callouts");
             Game.LogTrivial("Version " + curVersion + "");
-            Game.LogTrivial("Visit the GitHub page to give suggestions and report issues: https://github.com/Fritoqc/FelixsCalloutsRemade. Enjoy!");
+            Game.LogTrivial("Visit the GitHub page to give suggestions and report issues: https://github.com/FritoQC-Hosting/FritosCallouts. Enjoy!");
 
             if (Config.INIFile.Exists()) Game.LogTrivial("FritoQC Callouts Config is Installed by User.");
             else Game.LogTrivial("FritoQC Callouts Config is NOT Installed by User.");
