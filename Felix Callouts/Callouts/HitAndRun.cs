@@ -96,7 +96,7 @@ namespace FelixsCallouts.Callouts
                 SuspectVehicle.Dismiss();
             }
 
-            Game.LogTrivial("FelixsCallouts | High Speed Chase Ended");
+            Game.LogTrivial("FritoQC Callouts | High Speed Chase Ended");
 
         }
 
