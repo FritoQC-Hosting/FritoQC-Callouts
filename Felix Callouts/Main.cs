@@ -23,20 +23,20 @@ namespace FelixsCallouts
         public override void Initialize()
         {
             Functions.OnOnDutyStateChanged += OnOnDutyStateChangedHandler;
-            Game.LogTrivial("FELIXSCALLOUTS: Felix's Callouts " + curVersion + " by Fruity has been loaded.");
+            Game.LogTrivial("FritoQC Callouts: FritoQC Callouts " + curVersion + " by Fruity has been loaded.");
         }
         public override void Finally()
         {
-            Game.LogTrivial("FELIXSCALLOUTS: FelixsCallouts has been cleaned up.");
+            Game.LogTrivial("FritoQC Callouts: FritoQC Callouts has been cleaned up.");
         }
         private static void OnOnDutyStateChangedHandler(bool OnDuty)
         {
             if (OnDuty)
             {
-                int num = (int)Game.DisplayNotification("3dtextures", "mpgroundlogo_cops", "Felix's Callouts", "~y~v." + curVersion + " ~b~by Fruity", " ~g~Loaded Successfully. ~b~Enjoy!");
+                int num = (int)Game.DisplayNotification("3dtextures", "mpgroundlogo_cops", "FritoQC Callouts", "~y~v." + curVersion + " ~b~by Fruity", " ~g~Loaded Successfully. ~b~Enjoy!");
                 GameFiber.StartNew(delegate
                 {
-                    Game.LogTrivial("FELIXSCALLOUTS: Player Went on Duty. Checking for Updates.");
+                    Game.LogTrivial("FritoQC Callouts: Player Went on Duty. Checking for Updates.");
                     try
                     {
                         Thread FetchVersionThread = new Thread(() =>
@@ -49,7 +49,7 @@ namespace FelixsCallouts
 
                                     NewVersion = new Version(s);
                                 }
-                                catch (Exception) { Game.LogTrivial("FELIXSCALLOUTS: LSPDFR API down. Aborting checks."); }
+                                catch (Exception) { Game.LogTrivial("FritoQC Callouts: LSPDFR API down. Aborting checks."); }
                             }
                         });
 
@@ -63,38 +63,38 @@ namespace FelixsCallouts
                             // compare the versions  
                             if (curVersion.CompareTo(NewVersion) < 0)
                             {
-                                Game.LogTrivial("FELIXSCALLOUTS: Finished Checking Felix's Callouts for Updates.");
-                                Game.LogTrivial("FELIXSCALLOUTS: Update Available for Felis's Callouts. Installed Version " + curVersion + " ,New Version " + NewVersion);
-                                Game.DisplayNotification("~g~Update Available~w~ for ~b~FelixsCallouts! Download at ~y~lcpdfr.com.");
-                                Game.DisplayNotification("It is ~y~Strongly Recommended~w~ to~g~ Update~b~ FelixsCallouts. ~w~Playing on an Old Version ~r~May Cause Issues!");
-                                Game.LogTrivial("====================FELIXSCALLOUTS WARNING====================");
-                                Game.LogTrivial("Outdated FelixsCallouts Version. Please Update if You Experience Issues!!");
-                                Game.LogTrivial("====================FELIXSCALLOUTS WARNING====================");
+                                Game.LogTrivial("FritoQC Callouts: Finished Checking FritoQC Callouts for Updates.");
+                                Game.LogTrivial("FritoQC Callouts: Update Available for FritoQC Callouts. Installed Version " + curVersion + " ,New Version " + NewVersion);
+                                Game.DisplayNotification("~g~Update Available~w~ for ~b~FritoQC Callouts! Download at ~y~lcpdfr.com.");
+                                Game.DisplayNotification("It is ~y~Strongly Recommended~w~ to~g~ Update~b~ FritoQC Callouts. ~w~Playing on an Old Version ~r~May Cause Issues!");
+                                Game.LogTrivial("====================FritoQC Callouts WARNING====================");
+                                Game.LogTrivial("Outdated FritoQC Callouts Version. Please Update if You Experience Issues!!");
+                                Game.LogTrivial("====================FritoQC Callouts WARNING====================");
                                 UpToDate = false;
                             }
                             else if (curVersion.CompareTo(NewVersion) > 0)
                             {
-                                Game.LogTrivial("FELIXSCALLOUTS: DETECTED BETA RELEASE. DO NOT REDISTRIBUTE. PLEASE REPORT ALL ISSUES.");
-                                Game.DisplayNotification("FELIXSCALLOUTS: ~r~DETECTED BETA RELEASE. ~w~DO NOT REDISTRIBUTE. PLEASE REPORT ALL ISSUES.");
+                                Game.LogTrivial("FritoQC Callouts: DETECTED BETA RELEASE. DO NOT REDISTRIBUTE. PLEASE REPORT ALL ISSUES.");
+                                Game.DisplayNotification("FritoQC Callouts: ~r~DETECTED BETA RELEASE. ~w~DO NOT REDISTRIBUTE. PLEASE REPORT ALL ISSUES.");
                                 UpToDate = true;
                                 Beta = true;
                             }
                             else
                             {
-                                Game.LogTrivial("FELIXSCALLOUTS: Finished Checking Felix's Callouts for Updates.");
-                                Game.DisplayNotification("You are on the ~g~Latest Version~w~ of ~b~FelixsCallouts.");
-                                Game.LogTrivial("FELIXSCALLOUTS: Felix's Callouts Callouts is Up to Date.");
+                                Game.LogTrivial("FritoQC Callouts: Finished Checking FritoQC Callouts for Updates.");
+                                Game.DisplayNotification("You are on the ~g~Latest Version~w~ of ~b~FritoQC Callouts.");
+                                Game.LogTrivial("FritoQC Callouts: FritoQC Callouts is Up to Date.");
                                 UpToDate = true;
                             }
                         }
                         catch (Exception)
                         {
-                            Game.LogTrivial("FELIXSCALLOUTS: Error while Processing Thread to Check for Updates.");
+                            Game.LogTrivial("FritoQC Callouts: Error while Processing Thread to Check for Updates.");
                         }
                     }
                     catch (Exception)
                     {
-                        Game.LogTrivial("FELIXSCALLOUTS: Error while checking Felis's Callouts for updates.");
+                        Game.LogTrivial("FritoQC Callouts: Error while checking Felis's Callouts for updates.");
                     }
                 });
                 RegisterCallouts();
@@ -102,13 +102,13 @@ namespace FelixsCallouts
         }
         private static void RegisterCallouts()
         {
-            Game.LogTrivial("==========FELIXSCALLOUTS INFORMATION==========");
-            Game.LogTrivial("FelixsCallouts by Fruity");
+            Game.LogTrivial("==========FritoQC Callouts INFORMATION==========");
+            Game.LogTrivial("FritoQC Callouts");
             Game.LogTrivial("Version " + curVersion + "");
-            Game.LogTrivial("Please Join My Discord Server to Report Bugs/Improvements: https://discord.gg/qkmpBJmjJd. Enjoy!");
+            Game.LogTrivial("Visit the GitHub page to give suggestions and report issues: https://github.com/Fritoqc/FelixsCalloutsRemade. Enjoy!");
 
-            if (Config.INIFile.Exists()) Game.LogTrivial("FelixsCallouts Config is Installed by User.");
-            else Game.LogTrivial("FelixsCallouts Config is NOT Installed by User.");
+            if (Config.INIFile.Exists()) Game.LogTrivial("FritoQC Callouts Config is Installed by User.");
+            else Game.LogTrivial("FritoQC Callouts Config is NOT Installed by User.");
 
             if (Functions.GetAllUserPlugins().ToList().Any(a => a != null && a.FullName.Contains("StopThePed")) == true)
             {
