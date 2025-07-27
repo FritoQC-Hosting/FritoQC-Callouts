@@ -7,7 +7,7 @@ namespace FelixsCallouts
 {
     internal static class Config
     {
-        public static readonly InitializationFile INIFile = new InitializationFile(@"Plugins\LSPDFR\FelixsCallouts.ini");
+        public static readonly InitializationFile INIFile = new InitializationFile(@"Plugins\LSPDFR\FritoQC Callouts.ini");
 
         //All Callouts
         public static readonly bool GunShotsReported = INIFile.ReadBoolean("Callouts", "Gunshots Reported", true);
