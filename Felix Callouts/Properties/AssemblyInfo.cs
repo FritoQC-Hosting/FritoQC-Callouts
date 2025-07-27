@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("FritoQC Callouts")]
-[assembly: AssemblyDescription("The 2025 version of Felix's Callouts")]
+[assembly: AssemblyTitle("The 2025 version of Felix's Callouts")]
+[assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("FritoQC Callouts")]
-[assembly: AssemblyCopyright("Copyright ©  2021")]
+[assembly: AssemblyCopyright("© 2021 FritoQC")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

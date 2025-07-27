@@ -71,7 +71,7 @@
     <Content Include="ScannerAudio\PANICBUTTON.wav" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="FelixsCallouts.ini" />
+    <None Include="FritoQC Callouts.ini" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
