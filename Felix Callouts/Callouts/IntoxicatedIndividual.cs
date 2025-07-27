@@ -135,7 +135,7 @@ namespace FelixsCallouts.Callouts
                 SuspectBlip.Delete();
             }
 
-            Game.LogTrivial("FelixsCallouts | Intoxicated Person Ended");
+            Game.LogTrivial("FritoQC Callouts | Intoxicated Person Ended");
 
         }
     }
