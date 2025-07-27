@@ -77,7 +77,7 @@ namespace FelixsCallouts.Callouts
                 SuspectBlip.Delete();
             }
 
-            Game.LogTrivial("FelixsCallouts | GunShots Reported Ended");
+            Game.LogTrivial("FritoQC Callouts | GunShots Reported Ended");
 
         }
 
