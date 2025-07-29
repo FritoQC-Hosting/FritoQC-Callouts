@@ -6,7 +6,7 @@ using LSPD_First_Response.Mod.API;
 using LSPD_First_Response.Mod.Callouts;
 using System.Drawing;
 using CalloutInterfaceAPI;
-using FelixsCallouts.Utility;
+using FritosCallouts.Utility;
 
 namespace FritosCallouts.Callouts
 {
@@ -37,7 +37,7 @@ namespace FritosCallouts.Callouts
 
         public override bool OnCalloutAccepted()
         {
-            SuspectVehicle = new Vehicle(FelixsUtils.GetRandomVehicleModel(), Spawnpoint);
+            SuspectVehicle = new Vehicle(FritosUtils.GetRandomVehicleModel(), Spawnpoint);
             SuspectVehicle.IsPersistent = true;
             STP.SetVehicleInsurance(SuspectVehicle, StopThePed.API.STPVehicleStatus.None);
 

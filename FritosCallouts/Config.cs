@@ -7,7 +7,7 @@ namespace FritosCallouts
 {
     internal static class Config
     {
-        public static readonly InitializationFile INIFile = new InitializationFile(@"Plugins\LSPDFR\FritoQC Callouts.ini");
+        public static readonly InitializationFile INIFile = new InitializationFile(@"Plugins\LSPDFR\FritoQCsCallouts.ini");
 
         //All Callouts
         public static readonly bool GunShotsReported = INIFile.ReadBoolean("Callouts", "Gunshots Reported", true);
