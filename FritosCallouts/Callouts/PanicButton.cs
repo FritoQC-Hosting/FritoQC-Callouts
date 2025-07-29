@@ -93,7 +93,7 @@ namespace FritosCallouts.Callouts
                 LSPD_First_Response.Mod.API.Functions.PlayScannerAudioUsingPosition("ATTENTION_ALL_UNITS_01 SUSPECT_LAST_SEEN_01 ON_FOOT_02 CLOSE_TO_01", SuspectPed.Position);
                 SuspectBlip = SuspectPed.AttachBlip();
                 SuspectPed.Tasks.FightAgainst(Game.LocalPlayer.Character);
-                SuspectSpawned = true;
+                if (SuspectPed.IsAlive) { SuspectSpawned = true; }
             }
 
             if (SuspectSpawned && SuspectPed.IsDead)
