@@ -1,13 +1,16 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.6.33801.468
+VisualStudioVersion = 17.14.36327.8 d17.14
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FritosCallouts", "Felix Callouts\FritosCallouts.csproj", "{F5C57531-F3B9-438B-BBCE-4311E4822807}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FritosCallouts", "FritosCallouts\FritosCallouts.csproj", "{F5C57531-F3B9-438B-BBCE-4311E4822807}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F21B7AD3-972C-45DD-8A25-0FAA8660A489}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "References", "References", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
 	ProjectSection(SolutionItems) = preProject
-		README.md = README.md
+		..\..\..\Downloads\CalloutInterfaceAPI.dll = ..\..\..\Downloads\CalloutInterfaceAPI.dll
+		..\..\..\Downloads\LSPD First Response.dll = ..\..\..\Downloads\LSPD First Response.dll
+		..\..\..\Downloads\RagePluginHookSDK.dll = ..\..\..\Downloads\RagePluginHookSDK.dll
+		..\..\..\Downloads\StopThePed.dll = ..\..\..\Downloads\StopThePed.dll
 	EndProjectSection
 EndProject
 Global
@@ -25,6 +28,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {42427F12-A188-475E-BBCA-0F500D9152D3}
+		SolutionGuid = {13FC73BE-CA16-4733-9966-FC70247A24CA}
 	EndGlobalSection
 EndGlobal
