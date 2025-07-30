@@ -18,7 +18,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\..\..\..\..\..\..\..\Program Files %28x86%29\Steam\steamapps\common\Grand Theft Auto V\plugins\LSPDFR\</OutputPath>
+    <OutputPath>..\Build\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -32,26 +32,20 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CalloutInterfaceAPI, Version=1.0.3.0, Culture=neutral, processorArchitecture=AMD64">
-      <HintPath>..\packages\CalloutInterfaceAPI.1.0.3\lib\net48\CalloutInterfaceAPI.dll</HintPath>
-    </Reference>
-    <Reference Include="IPT.Common, Version=1.4.4.0, Culture=neutral, processorArchitecture=AMD64">
-      <HintPath>..\packages\IPT.Common.1.4.4\lib\net48\IPT.Common.dll</HintPath>
+    <Reference Include="CalloutInterfaceAPI">
+      <HintPath>..\Build\References\CalloutInterfaceAPI.dll</HintPath>
     </Reference>
     <Reference Include="LSPD First Response">
-      <HintPath>..\..\References\LSPD First Response.dll</HintPath>
+      <HintPath>..\Build\References\LSPD First Response.dll</HintPath>
     </Reference>
     <Reference Include="RAGENativeUI, Version=1.9.3.0, Culture=neutral, processorArchitecture=AMD64">
       <HintPath>..\packages\RAGENativeUI.1.9.3\lib\net472\RAGENativeUI.dll</HintPath>
     </Reference>
-    <Reference Include="RagePluginHook, Version=0.0.0.0, Culture=neutral, processorArchitecture=AMD64">
-      <HintPath>..\packages\RagePluginHook.1.109.1\lib\net472\RagePluginHook.dll</HintPath>
-    </Reference>
     <Reference Include="RagePluginHookSDK">
-      <HintPath>..\..\References\RagePluginHookSDK.dll</HintPath>
+      <HintPath>..\Build\References\RagePluginHookSDK.dll</HintPath>
     </Reference>
     <Reference Include="StopThePed">
-      <HintPath>..\..\References\StopThePed.dll</HintPath>
+      <HintPath>..\Build\References\StopThePed.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

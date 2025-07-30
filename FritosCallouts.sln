@@ -1,17 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36327.8 d17.14
+VisualStudioVersion = 17.14.36327.8
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FritosCallouts", "FritosCallouts\FritosCallouts.csproj", "{F5C57531-F3B9-438B-BBCE-4311E4822807}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "References", "References", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
-	ProjectSection(SolutionItems) = preProject
-		..\..\..\Downloads\CalloutInterfaceAPI.dll = ..\..\..\Downloads\CalloutInterfaceAPI.dll
-		..\..\..\Downloads\LSPD First Response.dll = ..\..\..\Downloads\LSPD First Response.dll
-		..\..\..\Downloads\RagePluginHookSDK.dll = ..\..\..\Downloads\RagePluginHookSDK.dll
-		..\..\..\Downloads\StopThePed.dll = ..\..\..\Downloads\StopThePed.dll
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

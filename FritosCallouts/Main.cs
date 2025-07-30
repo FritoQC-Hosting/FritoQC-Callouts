@@ -18,12 +18,13 @@ namespace FritosCallouts
         public static bool CalloutInterface; //if Callout Interface is installed by the user
         public static bool UpToDate; //if the Plugin is updated.
         public static bool Beta = false;
+
         public static bool Debug_Mode = true;
 
         public override void Initialize()
         {
             Functions.OnOnDutyStateChanged += OnOnDutyStateChangedHandler;
-            Game.LogTrivial("FritoQC Callouts: FritoQC Callouts " + curVersion + " by Fruity has been loaded.");
+            Game.LogTrivial("FritoQC Callouts: FritoQC Callouts " + curVersion + " by FritoQC has been loaded.");
         }
         public override void Finally()
         {
