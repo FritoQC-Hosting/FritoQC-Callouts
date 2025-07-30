@@ -21,6 +21,8 @@ namespace FritosCallouts.Callouts
         private Ped Suspect2;
         private Blip Blip1;
         private Blip Blip2;
+        private LHandle Pursuit;
+        private bool onScene = false;
 
         public override bool OnBeforeCalloutDisplayed()
         {
@@ -30,7 +32,6 @@ namespace FritosCallouts.Callouts
             CalloutMessage = "Robbery in progress";
             CalloutPosition = Location;
             LSPD_First_Response.Mod.API.Functions.PlayScannerAudioUsingPosition("ATTENTION_ALL_UNITS_05 WE_HAVE CRIME_ROBBERY_01 CRIME_ROBBERY_04 IN_OR_ON_POSITION", Location);
-            CalloutInterfaceAPI.Functions.SendMessage(this, "Proceed with caution");
 
             return base.OnBeforeCalloutDisplayed();
         }
@@ -40,22 +41,27 @@ namespace FritosCallouts.Callouts
             Suspect1 = new Ped(Location.Around(5f));
             Suspect1.IsPersistent = true;
             Suspect1.BlockPermanentEvents = true;
+            Suspect2 = new Ped(Location.Around(5f));
+            Suspect2.IsPersistent = true;
+            Suspect2.BlockPermanentEvents = true;
+
             if (new Random().Next(0, 2) == 0) // Randomly assign a weapon
             {
                 Suspect1.Inventory.GiveNewWeapon("WEAPON_PISTOL", 100, true);
             }
 
-            Suspect2 = new Ped(Location.Around(5f));
-            Suspect2.IsPersistent = true;
-            Suspect2.BlockPermanentEvents = true;
+            if (new Random().Next(0, 2) == 0) // Randomly assign a weapon
+            {   
+                Suspect2.Inventory.GiveNewWeapon("WEAPON_PISTOL", 100, true);
+            }
+
             Blip WP = new Blip(Location);
             WP.EnableRoute(System.Drawing.Color.Blue);
             WP.Scale = 0.8f;
             WP.Name = "Robbery in progress";
-            if (new Random().Next(0, 2) == 0) // Randomly assign a weapon
-            {
-                Suspect2.Inventory.GiveNewWeapon("WEAPON_PISTOL", 100, true);
-            }
+
+            CalloutInterfaceAPI.Functions.SendMessage(this, "Proceed with caution\nSuspects may be armed");
+            LSPD_First_Response.Mod.API.Functions.PlayScannerAudio("UNITS_RESPOND_CODE_03_02");
 
 
             return base.OnCalloutAccepted();
@@ -65,6 +71,48 @@ namespace FritosCallouts.Callouts
         {
             base.Process();
 
+            if (Game.LocalPlayer.Character.DistanceTo(Location) <= 100f && !onScene)
+            {
+                Blip1 = Suspect1.AttachBlip();
+                Blip1.Color = Color.Red;
+                Blip1.Flash(1000, 10000);
+
+                Blip2 = Suspect2.AttachBlip();
+                Blip2.Color = Color.Red;
+                Blip2.Flash(1000, 10000);
+
+                Pursuit = LSPD_First_Response.Mod.API.Functions.CreatePursuit(); //Making prusuit
+                LSPD_First_Response.Mod.API.Functions.AddPedToPursuit(Pursuit, Suspect1);
+                LSPD_First_Response.Mod.API.Functions.AddPedToPursuit(Pursuit, Suspect2);
+                LSPD_First_Response.Mod.API.Functions.SetPursuitIsActiveForPlayer(Pursuit, true);
+                
+                Suspect1.Tasks.Flee(Game.LocalPlayer.Character, 200f, -1);
+                Suspect2.Tasks.Flee(Game.LocalPlayer.Character, 200f, -1);
+                
+                onScene = true;
+            }
+
+            if (onScene && Suspect2.Inventory.HasLoadedWeapon && Game.LocalPlayer.Character.DistanceTo(Suspect1) <= 10f)
+            {
+                if (Suspect1.IsAlive)
+                {
+                    Suspect1.Tasks.FightAgainst(Game.LocalPlayer.Character);
+                }
+            }
+
+            if (onScene && Suspect2.Inventory.HasLoadedWeapon && Game.LocalPlayer.Character.DistanceTo(Suspect2) <= 15f)
+            {
+                if (Suspect2.IsAlive)
+                {
+                    Suspect2.Tasks.FightAgainst(Game.LocalPlayer.Character);
+                }
+            }
+
+
+            if (onScene && !Suspect1.IsAlive && !Suspect2.IsAlive || !LSPD_First_Response.Mod.API.Functions.IsPursuitStillRunning(Pursuit))
+            {
+                End();
+            }
 
         }
 
@@ -72,15 +120,13 @@ namespace FritosCallouts.Callouts
         {
             base.End();
 
-            //Game.DisplayNotification("Code 4");
-            //LSPD_First_Response.Mod.API.Functions.PlayScannerAudio("");
+            if (Suspect1.Exists()) { Suspect1.Dismiss(); }
+            if (Suspect2.Exists()) { Suspect2.Dismiss(); }
+            if (Blip1.Exists()) { Blip1.Delete(); }
+            if (Blip2.Exists()) { Blip2.Delete(); }
 
-            if (CopPed.Exists()) { CopPed.Dismiss(); }
-            if (CopBlip.Exists()) { CopBlip.Delete(); }
-            if (CopCar.Exists()) { CopCar.Dismiss(); }
+            if (LSPD_First_Response.Mod.API.Functions.IsPursuitStillRunning(Pursuit)) { LSPD_First_Response.Mod.API.Functions.ForceEndPursuit(Pursuit); }
 
-            if (SuspectPed.Exists()) { SuspectPed.Dismiss(); }
-            if (SuspectBlip.Exists()) { SuspectBlip.Delete(); }
 
             Game.LogTrivial("FC | Panic Button Ended");
 
