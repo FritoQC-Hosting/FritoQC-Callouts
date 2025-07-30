@@ -74,7 +74,7 @@
     <Content Include="ScannerAudio\PANICBUTTON.wav" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="FritoQC Callouts.ini" />
+    <None Include="FritoQCCallouts.ini" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
