@@ -23,6 +23,7 @@ namespace FritosCallouts.Callouts
         private Blip Blip2;
         private LHandle Pursuit;
         private bool onScene = false;
+        private Blip WP;
 
         public override bool OnBeforeCalloutDisplayed()
         {
@@ -55,7 +56,7 @@ namespace FritosCallouts.Callouts
                 Suspect2.Inventory.GiveNewWeapon("WEAPON_PISTOL", 100, true);
             }
 
-            Blip WP = new Blip(Location);
+            WP.Position = Location;
             WP.EnableRoute(System.Drawing.Color.Blue);
             WP.Scale = 0.8f;
             WP.Name = "Robbery in progress";
@@ -73,6 +74,7 @@ namespace FritosCallouts.Callouts
 
             if (Game.LocalPlayer.Character.DistanceTo(Location) <= 100f && !onScene)
             {
+                WP.Delete();
                 Blip1 = Suspect1.AttachBlip();
                 Blip1.Color = Color.Red;
                 Blip1.Flash(1000, 10000);
@@ -109,7 +111,7 @@ namespace FritosCallouts.Callouts
             }
 
 
-            if (onScene && !Suspect1.IsAlive && !Suspect2.IsAlive || !LSPD_First_Response.Mod.API.Functions.IsPursuitStillRunning(Pursuit))
+            if (onScene && !Suspect1.IsAlive && !Suspect2.IsAlive)
             {
                 End();
             }
