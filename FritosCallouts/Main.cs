@@ -13,7 +13,7 @@ namespace FritosCallouts
     public class Main : Plugin
     {
         public static Version NewVersion = new Version();
-        public static Version curVersion = new Version("2.1");
+        public static Version curVersion = new Version("2.2");
         public static bool STP; //if STP is installed by the user
         public static bool CalloutInterface; //if Callout Interface is installed by the user
         public static bool UpToDate; //if the Plugin is updated.
@@ -34,7 +34,7 @@ namespace FritosCallouts
         {
             if (OnDuty)
             {
-                int num = (int)Game.DisplayNotification("3dtextures", "mpgroundlogo_cops", "FritoQC Callouts", "~y~v." + curVersion + " ~b~by Fruity", " ~g~Loaded Successfully. ~b~Enjoy!");
+                int num = (int)Game.DisplayNotification("3dtextures", "mpgroundlogo_cops", "FritoQC Callouts", "~y~v." + curVersion + " ~b~by Frito", " ~g~Loaded Successfully. ~b~Enjoy!");
                 GameFiber.StartNew(delegate
                 {
                     Game.LogTrivial("FritoQC Callouts: Player Went on Duty. Checking for Updates.");
@@ -95,7 +95,7 @@ namespace FritosCallouts
                     }
                     catch (Exception)
                     {
-                        Game.LogTrivial("FritoQC Callouts: Error while checking Felis's Callouts for updates.");
+                        Game.LogTrivial("FritoQC Callouts: Error while checking FritoQC Callouts for updates.");
                     }
                 });
                 RegisterCallouts();
@@ -141,6 +141,7 @@ namespace FritosCallouts
             if (Config.IntoxicatedIndividual || !Config.INIFile.Exists()) Functions.RegisterCallout(typeof(Callouts.IntoxicatedIndividual));
             if (Config.PanicButton || !Config.INIFile.Exists()) Functions.RegisterCallout(typeof(Callouts.PanicButton));
             if (Config.FightInProgress || !Config.INIFile.Exists()) Functions.RegisterCallout(typeof(Callouts.FightInProgress));
+            if (Config.FightInProgress || !Config.INIFile.Exists()) Functions.RegisterCallout(typeof(Callouts.Robbery));
 
             Game.LogTrivial("Finished Registering Callouts.");
 
