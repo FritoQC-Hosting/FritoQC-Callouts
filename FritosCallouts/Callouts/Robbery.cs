@@ -8,10 +8,12 @@ using System.Threading;
 using CalloutInterfaceAPI;
 using LSPD_First_Response.Mod.Callouts;
 using FritosCallouts.Utility;
+using LSPD_First_Response.Engine.Scripting.Entities;
+using System.Linq;
 
 namespace FritosCallouts.Callouts
 {
-    [CalloutInterface("Robbry in progress", CalloutProbability.Low, "Suspect's potentially armed", "Code 3", "LSPD")]
+    [CalloutInterface("Robbery in progress", CalloutProbability.Low, "Suspect's potentially armed", "Code 3", "LSPD")]
 
     public class Robbery : Callout
     {
@@ -41,26 +43,25 @@ namespace FritosCallouts.Callouts
         {
             Vector3 pos1 = Location.Around(5f);
             Suspect1 = new Ped(pos1);
-            Suspect1.Position = new Vector3(pos1.X, pos1.Y, (World.GetGroundZ(pos1, false, false) ?? pos1.Z) + 0.5f);
+            Suspect1.Position = new Vector3(pos1.X, pos1.Y, (World.GetGroundZ(pos1, false, false) ?? pos1.Z) + 1f);
             Suspect1.IsPersistent = true;
             Suspect1.BlockPermanentEvents = true;
 
             Vector3 pos2 = Location.Around(5f);
             Suspect2 = new Ped(pos2);
-            Suspect2.Position = new Vector3(pos2.X, pos2.Y, (World.GetGroundZ(pos2, false, false) ?? pos2.Z) + 0.5f);
+            Suspect2.Position = new Vector3(pos2.X, pos2.Y, (World.GetGroundZ(pos2, false, false) ?? pos2.Z) + 1f);
             Suspect2.IsPersistent = true;
             Suspect2.BlockPermanentEvents = true;
 
 
             if (new Random().Next(0, 2) == 0) // Randomly assign a weapon
             {
-                Suspect1.Inventory.GiveNewWeapon("WEAPON_PISTOL", 100, true);
+                Suspect1.Inventory.GiveNewWeapon(WeaponHash.CombatPistol, 100, true);
             }
 
-            if (new Random().Next(0, 2) == 0) // Randomly assign a weapon
-            {   
-                Suspect2.Inventory.GiveNewWeapon("WEAPON_PISTOL", 100, true);
-            }
+           
+            Suspect2.Inventory.GiveNewWeapon(WeaponHash.CombatPistol, 100, true);
+     
 
             WP = new Blip(Location);
             WP.Position = Location;
@@ -83,41 +84,20 @@ namespace FritosCallouts.Callouts
             if (Game.LocalPlayer.Character.DistanceTo(Location) <= 100f && !onScene)
             {
                 WP.Delete();
-                //Blip1 = Suspect1.AttachBlip();
-                //Blip1.Color = Color.Red;
-                //Blip1.Flash(1000, 10000);
-
-                //Blip2 = Suspect2.AttachBlip();
-                //Blip2.Color = Color.Red;
-                //Blip2.Flash(1000, 10000);
 
                 Pursuit = LSPD_First_Response.Mod.API.Functions.CreatePursuit(); //Making prusuit
                 LSPD_First_Response.Mod.API.Functions.AddPedToPursuit(Pursuit, Suspect1);
                 LSPD_First_Response.Mod.API.Functions.AddPedToPursuit(Pursuit, Suspect2);
                 LSPD_First_Response.Mod.API.Functions.SetPursuitIsActiveForPlayer(Pursuit, true);
-                
-                Suspect1.Tasks.Flee(Game.LocalPlayer.Character, 200f, -1);
-                Suspect2.Tasks.Flee(Game.LocalPlayer.Character, 200f, -1);
-                
+
+                LSPD_First_Response.Mod.API.Functions.SetPedResistanceChance(Suspect1, 1f);
+                LSPD_First_Response.Mod.API.Functions.AddPedContraband(Suspect1, ContrabandType.Misc, "Bag of Money");
+                LSPD_First_Response.Mod.API.Functions.AddPedContraband(Suspect1, ContrabandType.Weapon, "Pistol");
+                LSPD_First_Response.Mod.API.Functions.AddPedContraband(Suspect2, ContrabandType.Identification, "Long blonde wig");
+
+
                 onScene = true;
             }
-
-            if (onScene && Suspect2.Inventory.HasLoadedWeapon && Game.LocalPlayer.Character.DistanceTo(Suspect1) <= 10f)
-            {
-                if (Suspect1.IsAlive)
-                {
-                    Suspect1.Tasks.FightAgainst(Game.LocalPlayer.Character);
-                }
-            }
-
-            if (onScene && Suspect2.Inventory.HasLoadedWeapon && Game.LocalPlayer.Character.DistanceTo(Suspect2) <= 15f)
-            {
-                if (Suspect2.IsAlive)
-                {
-                    Suspect2.Tasks.FightAgainst(Game.LocalPlayer.Character);
-                }
-            }
-
 
             if (onScene && !Suspect1.IsAlive && !Suspect2.IsAlive)
             {
