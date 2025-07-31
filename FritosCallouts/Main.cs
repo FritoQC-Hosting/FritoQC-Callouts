@@ -13,7 +13,7 @@ namespace FritosCallouts
     public class Main : Plugin
     {
         public static Version NewVersion = new Version();
-        public static Version curVersion = new Version("2.2");
+        public static Version curVersion = new Version("2.2.0");
         public static bool STP; //if STP is installed by the user
         public static bool CalloutInterface; //if Callout Interface is installed by the user
         public static bool UpToDate; //if the Plugin is updated.

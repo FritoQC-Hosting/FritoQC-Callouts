@@ -27,7 +27,7 @@ namespace FritosCallouts.Callouts
 
         public override bool OnBeforeCalloutDisplayed()
         {
-            Location = FritosUtils.GetRandomLocation();
+            Location = FritosUtils.GetRandomLocation("clothing");
             ShowCalloutAreaBlipBeforeAccepting(Location, 30f);
             AddMinimumDistanceCheck(50f, Location);
             CalloutMessage = "Robbery in progress";
@@ -39,12 +39,18 @@ namespace FritosCallouts.Callouts
 
         public override bool OnCalloutAccepted() //Init
         {
-            Suspect1 = new Ped(Location.Around(5f));
+            Vector3 pos1 = Location.Around(5f);
+            Suspect1 = new Ped(pos1);
+            Suspect1.Position = new Vector3(pos1.X, pos1.Y, (World.GetGroundZ(pos1, false, false) ?? pos1.Z) + 0.5f);
             Suspect1.IsPersistent = true;
             Suspect1.BlockPermanentEvents = true;
-            Suspect2 = new Ped(Location.Around(5f));
+
+            Vector3 pos2 = Location.Around(5f);
+            Suspect2 = new Ped(pos2);
+            Suspect2.Position = new Vector3(pos2.X, pos2.Y, (World.GetGroundZ(pos2, false, false) ?? pos2.Z) + 0.5f);
             Suspect2.IsPersistent = true;
             Suspect2.BlockPermanentEvents = true;
+
 
             if (new Random().Next(0, 2) == 0) // Randomly assign a weapon
             {
@@ -56,8 +62,10 @@ namespace FritosCallouts.Callouts
                 Suspect2.Inventory.GiveNewWeapon("WEAPON_PISTOL", 100, true);
             }
 
+            WP = new Blip(Location);
             WP.Position = Location;
-            WP.EnableRoute(System.Drawing.Color.Blue);
+            WP.Color = System.Drawing.Color.Red;
+            WP.EnableRoute(System.Drawing.Color.Red);
             WP.Scale = 0.8f;
             WP.Name = "Robbery in progress";
 
@@ -75,13 +83,13 @@ namespace FritosCallouts.Callouts
             if (Game.LocalPlayer.Character.DistanceTo(Location) <= 100f && !onScene)
             {
                 WP.Delete();
-                Blip1 = Suspect1.AttachBlip();
-                Blip1.Color = Color.Red;
-                Blip1.Flash(1000, 10000);
+                //Blip1 = Suspect1.AttachBlip();
+                //Blip1.Color = Color.Red;
+                //Blip1.Flash(1000, 10000);
 
-                Blip2 = Suspect2.AttachBlip();
-                Blip2.Color = Color.Red;
-                Blip2.Flash(1000, 10000);
+                //Blip2 = Suspect2.AttachBlip();
+                //Blip2.Color = Color.Red;
+                //Blip2.Flash(1000, 10000);
 
                 Pursuit = LSPD_First_Response.Mod.API.Functions.CreatePursuit(); //Making prusuit
                 LSPD_First_Response.Mod.API.Functions.AddPedToPursuit(Pursuit, Suspect1);
@@ -113,6 +121,7 @@ namespace FritosCallouts.Callouts
 
             if (onScene && !Suspect1.IsAlive && !Suspect2.IsAlive)
             {
+                FritosUtils.Debug("Robbery suspects dead");
                 End();
             }
 
@@ -126,12 +135,11 @@ namespace FritosCallouts.Callouts
             if (Suspect2.Exists()) { Suspect2.Dismiss(); }
             if (Blip1.Exists()) { Blip1.Delete(); }
             if (Blip2.Exists()) { Blip2.Delete(); }
+            if(WP.Exists()) { WP.Delete(); }
 
             if (LSPD_First_Response.Mod.API.Functions.IsPursuitStillRunning(Pursuit)) { LSPD_First_Response.Mod.API.Functions.ForceEndPursuit(Pursuit); }
 
-
-            Game.LogTrivial("FC | Panic Button Ended");
-
+            FritosUtils.Debug("Robbery Ended");
         }
 
     }
