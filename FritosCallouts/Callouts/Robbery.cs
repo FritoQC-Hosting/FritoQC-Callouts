@@ -13,7 +13,7 @@ using System.Linq;
 
 namespace FritosCallouts.Callouts
 {
-    [CalloutInterface("Robbery in progress", CalloutProbability.Low, "Suspect's potentially armed", "Code 3", "LSPD")]
+    [CalloutInterface("Robbery in progress", CalloutProbability.Medium, "Suspect's potentially armed", "Code 3", "LSPD")]
 
     public class Robbery : Callout
     {
@@ -29,7 +29,7 @@ namespace FritosCallouts.Callouts
 
         public override bool OnBeforeCalloutDisplayed()
         {
-            Location = FritosUtils.GetRandomLocation("clothing");
+            Location = FritosUtils.GetRandomLocation();
             ShowCalloutAreaBlipBeforeAccepting(Location, 30f);
             AddMinimumDistanceCheck(50f, Location);
             CalloutMessage = "Robbery in progress";
@@ -41,15 +41,15 @@ namespace FritosCallouts.Callouts
 
         public override bool OnCalloutAccepted() //Init
         {
-            Vector3 pos1 = Location.Around(5f);
+            Vector3 pos1 = Location.Around(2f);
             Suspect1 = new Ped(pos1);
-            Suspect1.Position = new Vector3(pos1.X, pos1.Y, (World.GetGroundZ(pos1, false, false) ?? pos1.Z) + 1f);
+            Suspect1.Position = new Vector3(pos1.X, pos1.Y, (World.GetGroundZ(pos1, false, false) ?? pos1.Z) + 2f);
             Suspect1.IsPersistent = true;
             Suspect1.BlockPermanentEvents = true;
 
-            Vector3 pos2 = Location.Around(5f);
+            Vector3 pos2 = Location.Around(2f);
             Suspect2 = new Ped(pos2);
-            Suspect2.Position = new Vector3(pos2.X, pos2.Y, (World.GetGroundZ(pos2, false, false) ?? pos2.Z) + 1f);
+            Suspect2.Position = new Vector3(pos2.X, pos2.Y, (World.GetGroundZ(pos2, false, false) ?? pos2.Z) + 2f);
             Suspect2.IsPersistent = true;
             Suspect2.BlockPermanentEvents = true;
 
@@ -81,7 +81,7 @@ namespace FritosCallouts.Callouts
         {
             base.Process();
 
-            if (Game.LocalPlayer.Character.DistanceTo(Location) <= 100f && !onScene)
+            if (Game.LocalPlayer.Character.DistanceTo(Location) <= 150f && !onScene)
             {
                 WP.Delete();
 
@@ -94,7 +94,6 @@ namespace FritosCallouts.Callouts
                 LSPD_First_Response.Mod.API.Functions.AddPedContraband(Suspect1, ContrabandType.Misc, "Bag of Money");
                 LSPD_First_Response.Mod.API.Functions.AddPedContraband(Suspect1, ContrabandType.Weapon, "Pistol");
                 LSPD_First_Response.Mod.API.Functions.AddPedContraband(Suspect2, ContrabandType.Identification, "Long blonde wig");
-
 
                 onScene = true;
             }
