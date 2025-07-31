@@ -13,7 +13,7 @@ using System.Linq;
 
 namespace FritosCallouts.Callouts
 {
-    [CalloutInterface("Air one needing ground units", CalloutProbability.Medium, "Air one requesting ground units.", "Code 2", "LSPD")]
+    [CalloutInterface("Air one needing ground units", CalloutProbability.High, "Air one requesting ground units.", "Code 2", "LSPD")]
 
     public class HeliPursuit : Callout
     {
