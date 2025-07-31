@@ -61,6 +61,7 @@
   <ItemGroup>
     <Compile Include="Callouts\FightInProgress.cs" />
     <Compile Include="Callouts\GunShotsReported.cs" />
+    <Compile Include="Callouts\HeliPursuit.cs" />
     <Compile Include="Callouts\HitAndRun.cs" />
     <Compile Include="Callouts\IntoxicatedIndividual.cs" />
     <Compile Include="Callouts\PanicButton.cs" />
