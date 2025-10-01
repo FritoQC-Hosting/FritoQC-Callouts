@@ -34,7 +34,7 @@ namespace FritosCallouts
         {
             if (OnDuty)
             {
-                int num = (int)Game.DisplayNotification("3dtextures", "mpgroundlogo_cops", "FritoQC Callouts", "~y~v." + curVersion + " ~b~by Fruity", " ~g~Loaded Successfully. ~b~Enjoy!");
+                int num = (int)Game.DisplayNotification("3dtextures", "mpgroundlogo_cops", "FritoQC Callouts", "~y~v" + curVersion, " ~g~Loaded Successfully. ~b~Enjoy!");
                 GameFiber.StartNew(delegate
                 {
                     Game.LogTrivial("FritoQC Callouts: Player Went on Duty. Checking for Updates.");
@@ -95,7 +95,7 @@ namespace FritosCallouts
                     }
                     catch (Exception)
                     {
-                        Game.LogTrivial("FritoQC Callouts: Error while checking Felis's Callouts for updates.");
+                        Game.LogTrivial("FritoQC Callouts: Error while checking FritoQC Callouts for updates.");
                     }
                 });
                 RegisterCallouts();
