@@ -1,11 +1,13 @@
-﻿// FritoLays
+﻿// FritoQC
 
 using System;
-using System.Net;
-using System.Threading;
-using LSPD_First_Response.Mod.API;
-using Rage;
 using System.Linq;
+using System.Net;
+using System.Reflection;
+using System.Threading;
+
+using Rage;
+using LSPD_First_Response.Mod.API;
 using LSPD_First_Response.Mod.Callouts;
 
 namespace FritosCallouts
@@ -13,7 +15,7 @@ namespace FritosCallouts
     public class Main : Plugin
     {
         public static Version NewVersion = new Version();
-        public static Version curVersion = new Version("2.1");
+        public static Version curVersion = Assembly.GetExecutingAssembly().GetName().Version;
         public static bool STP; //if STP is installed by the user
         public static bool CalloutInterface; //if Callout Interface is installed by the user
         public static bool UpToDate; //if the Plugin is updated.

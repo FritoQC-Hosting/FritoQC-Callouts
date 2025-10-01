@@ -1,4 +1,4 @@
-﻿//To Create your own INI file, pull a pro gamer move and simply copy/paste a random INI file and rename it to what you want to call it.
+﻿//To create your own INI file, pull a pro gamer move and simply copy/paste a random INI file and rename it to what you want to call it.
 
 using Rage;
 using System.Windows.Forms;
@@ -7,7 +7,7 @@ namespace FritosCallouts
 {
     internal static class Config
     {
-        public static readonly InitializationFile INIFile = new InitializationFile(@"Plugins\LSPDFR\FritoQCsCallouts.ini");
+        public static readonly InitializationFile INIFile = new InitializationFile(@"Plugins\LSPDFR\FritoQCCallouts.ini");
 
         //All Callouts
         public static readonly bool GunShotsReported = INIFile.ReadBoolean("Callouts", "Gunshots Reported", true);
