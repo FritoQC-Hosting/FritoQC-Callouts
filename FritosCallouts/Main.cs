@@ -26,17 +26,31 @@ namespace FritosCallouts
         public override void Initialize()
         {
             Functions.OnOnDutyStateChanged += OnOnDutyStateChangedHandler;
-            Game.LogTrivial("FritoQC Callouts: FritoQC Callouts " + curVersion + " by FritoQC has been loaded.");
+
+            // Use trimmed version for initial log
+            Version curTrimmed = new Version(curVersion.Major, curVersion.Minor, curVersion.Build);
+            Game.LogTrivial("FritoQC Callouts: FritoQC Callouts " + curTrimmed + " by FritoQC has been loaded.");
         }
+
         public override void Finally()
         {
             Game.LogTrivial("FritoQC Callouts: FritoQC Callouts has been cleaned up.");
         }
+
         private static void OnOnDutyStateChangedHandler(bool OnDuty)
         {
             if (OnDuty)
             {
-                int num = (int)Game.DisplayNotification("3dtextures", "mpgroundlogo_cops", "FritoQC Callouts", "~y~v" + curVersion, " ~g~Loaded Successfully. ~b~Enjoy!");
+                Version curTrimmed = new Version(curVersion.Major, curVersion.Minor, curVersion.Build);
+
+                int num = (int)Game.DisplayNotification(
+                    "3dtextures",
+                    "mpgroundlogo_cops",
+                    "FritoQC Callouts",
+                    "~y~v" + curTrimmed,
+                    " ~g~Loaded Successfully. ~b~Enjoy!"
+                );
+
                 GameFiber.StartNew(delegate
                 {
                     Game.LogTrivial("FritoQC Callouts: Player Went on Duty. Checking for Updates.");
@@ -50,7 +64,7 @@ namespace FritosCallouts
                                 {
                                     string s = client.DownloadString("http://www.lcpdfr.com/applications/downloadsng/interface/api.php?do=checkForUpdates&fileId=36706&textOnly=1");
 
-                                    NewVersion = new Version(s);
+                                    if (Version.TryParse(s.Trim(), out var v)) NewVersion = v;
                                 }
                                 catch (Exception) { Game.LogTrivial("FritoQC Callouts: LSPDFR API down. Aborting checks."); }
                             }
@@ -59,15 +73,23 @@ namespace FritosCallouts
                         FetchVersionThread.Start();
                         try
                         {
-                            while (FetchVersionThread.ThreadState != System.Threading.ThreadState.Stopped)
+                            while (FetchVersionThread.ThreadState != ThreadState.Stopped)
                             {
                                 GameFiber.Yield();
                             }
-                            // compare the versions  
-                            if (curVersion.CompareTo(NewVersion) < 0)
+                            if (NewVersion.Major == 0 && NewVersion.Minor == 0 && NewVersion.Build == 0)
+                            {
+                                Game.LogTrivial("FritoQC Callouts: Invalid or missing version info, skipping Beta check.");
+                                return;
+                            }
+
+                            // ===== Version Comparison (Trimmed to 3 parts) =====
+                            Version newTrimmed = new Version(NewVersion.Major, NewVersion.Minor, NewVersion.Build);
+
+                            if (curTrimmed.CompareTo(newTrimmed) < 0)
                             {
                                 Game.LogTrivial("FritoQC Callouts: Finished Checking FritoQC Callouts for Updates.");
-                                Game.LogTrivial("FritoQC Callouts: Update Available for FritoQC Callouts. Installed Version " + curVersion + " ,New Version " + NewVersion);
+                                Game.LogTrivial("FritoQC Callouts: Update Available for FritoQC Callouts. Installed Version " + curTrimmed + " ,New Version " + newTrimmed);
                                 Game.DisplayNotification("~g~Update Available~w~ for ~b~FritoQC Callouts! Download at ~y~lcpdfr.com.");
                                 Game.DisplayNotification("It is ~y~Strongly Recommended~w~ to~g~ Update~b~ FritoQC Callouts. ~w~Playing on an Old Version ~r~May Cause Issues!");
                                 Game.LogTrivial("====================FritoQC Callouts WARNING====================");
@@ -75,7 +97,7 @@ namespace FritosCallouts
                                 Game.LogTrivial("====================FritoQC Callouts WARNING====================");
                                 UpToDate = false;
                             }
-                            else if (curVersion.CompareTo(NewVersion) > 0)
+                            else if (curTrimmed.CompareTo(newTrimmed) > 0)
                             {
                                 Game.LogTrivial("FritoQC Callouts: DETECTED BETA RELEASE. DO NOT REDISTRIBUTE. PLEASE REPORT ALL ISSUES.");
                                 Game.DisplayNotification("FritoQC Callouts: ~r~DETECTED BETA RELEASE. ~w~DO NOT REDISTRIBUTE. PLEASE REPORT ALL ISSUES.");
@@ -89,6 +111,7 @@ namespace FritosCallouts
                                 Game.LogTrivial("FritoQC Callouts: FritoQC Callouts is Up to Date.");
                                 UpToDate = true;
                             }
+                            // ===== End of Trimmed Comparison =====
                         }
                         catch (Exception)
                         {
@@ -103,11 +126,13 @@ namespace FritosCallouts
                 RegisterCallouts();
             }
         }
+
         private static void RegisterCallouts()
         {
             Game.LogTrivial("==========FritoQC Callouts INFORMATION==========");
             Game.LogTrivial("FritoQC Callouts");
-            Game.LogTrivial("Version " + curVersion + "");
+            Version curTrimmed = new Version(curVersion.Major, curVersion.Minor, curVersion.Build);
+            Game.LogTrivial("Version " + curTrimmed + "");
             Game.LogTrivial("Visit the GitHub page to give suggestions and report issues: https://github.com/FritoQC-Hosting/FritosCallouts. Enjoy!");
 
             if (Config.INIFile.Exists()) Game.LogTrivial("FritoQC Callouts Config is Installed by User.");
@@ -150,7 +175,6 @@ namespace FritosCallouts
             if (Beta)
             {
                 Game.LogTrivial("Started Registering Beta Callouts.");
-
 
                 Game.LogTrivial("Finished Registering Beta Callouts.");
             }
