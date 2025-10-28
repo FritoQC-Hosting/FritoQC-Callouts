@@ -11,7 +11,7 @@ using Rage.Native;
 namespace FritosCallouts.Callouts
 {
     //[CalloutInfo("IntoxicatedIndividual", CalloutProbability.High)]
-    [CalloutInterface("Intoxicated Individual", CalloutProbability.High, "Drunk person seen in public.", "Code 2", "LSPD")]
+    [CalloutInterface("[FQ] Intoxicated Individual", CalloutProbability.High, "Drunk person seen in public.", "Code 2", "LSPD")]
 
     class IntoxicatedIndividual : Callout
     {

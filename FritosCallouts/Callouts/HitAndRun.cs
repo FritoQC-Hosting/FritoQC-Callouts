@@ -12,7 +12,7 @@ using LSPDFR = LSPD_First_Response.Mod.API.Functions;
 namespace FritosCallouts.Callouts
 {
     [CalloutInterface(
-        "Hit and Run",
+        "[FQ] Hit and Run",
         CalloutProbability.High,
         "Hit and run vehicle spotted in the area.",
         "Code 3",

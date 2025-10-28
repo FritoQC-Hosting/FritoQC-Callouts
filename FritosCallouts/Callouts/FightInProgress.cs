@@ -10,7 +10,7 @@ using FritosCallouts.Utility;
 namespace FritosCallouts.Callouts
 {
     //[CalloutInfo("GunShotsReported", CalloutProbability.High)]
-    [CalloutInterface("Fight In Progress", CalloutProbability.Medium, "2 Individuals fighting", "Code 3", "LSPD")]
+    [CalloutInterface("[FQ] Fight In Progress", CalloutProbability.Medium, "2 Individuals fighting", "Code 3", "LSPD")]
 
 
     class FightInProgress : Callout
