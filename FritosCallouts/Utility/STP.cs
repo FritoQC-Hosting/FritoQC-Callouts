@@ -11,12 +11,12 @@ namespace FritosCallouts
         {
             if (!Main.STP)
             {
-                Game.LogTrivial($"[FritoQC] StopThePed not installed, skipping '{action}'.");
+                Game.LogTrivial($"[FritoQC Callouts] StopThePed not installed, skipping '{action}'.");
                 return false;
             }
 
             if (Main.Debug_Mode)
-                Game.LogTrivial($"[FritoQC] STP - {action}");
+                Game.LogTrivial($"[FritoQC Callouts] STP - {action}");
 
             return true;
         }
@@ -43,7 +43,7 @@ namespace FritosCallouts
             }
             catch
             {
-                Game.LogTrivial("[FritoQC] Failed to call SetPedDrunk via StopThePed.");
+                Game.LogTrivial("[FritoQC Callouts] Failed to call SetPedDrunk via StopThePed.");
             }
         }
 
@@ -61,7 +61,7 @@ namespace FritosCallouts
             }
             catch
             {
-                Game.LogTrivial("[FritoQC] Failed to call SetPedUnderDrugInfluence via StopThePed.");
+                Game.LogTrivial("[FritoQC Callouts] Failed to call SetPedUnderDrugInfluence via StopThePed.");
             }
         }
 
@@ -79,7 +79,7 @@ namespace FritosCallouts
             }
             catch
             {
-                Game.LogTrivial("[FritoQC] Failed to call SetVehicleInsurance via StopThePed.");
+                Game.LogTrivial("[FritoQC Callouts] Failed to call SetVehicleInsurance via StopThePed.");
             }
         }
 
@@ -97,7 +97,7 @@ namespace FritosCallouts
             }
             catch
             {
-                Game.LogTrivial("[FritoQC] Failed to call SetVehicleRegistration via StopThePed.");
+                Game.LogTrivial("[FritoQC Callouts] Failed to call SetVehicleRegistration via StopThePed.");
             }
         }
 
@@ -115,7 +115,7 @@ namespace FritosCallouts
             }
             catch
             {
-                Game.LogTrivial("[FritoQC] Failed to call InjectPedItems via StopThePed.");
+                Game.LogTrivial("[FritoQC Callouts] Failed to call InjectPedItems via StopThePed.");
             }
         }
     }

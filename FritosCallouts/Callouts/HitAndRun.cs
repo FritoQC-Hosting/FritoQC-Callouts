@@ -77,7 +77,7 @@ namespace FritosCallouts.Callouts
             }
             catch (Exception ex)
             {
-                Game.LogTrivial($"[FritoQC] Error initializing HitAndRun callout: {ex}");
+                Game.LogTrivial($"[FritoQC Callouts] Error initializing HitAndRun callout: {ex}");
                 End();
                 return false;
             }
@@ -104,7 +104,7 @@ namespace FritosCallouts.Callouts
             }
             catch (Exception ex)
             {
-                Game.LogTrivial($"[FritoQC] Error in HitAndRun.Process(): {ex.Message}");
+                Game.LogTrivial($"[FritoQC Callouts] Error in HitAndRun.Process(): {ex.Message}");
             }
         }
 
@@ -121,7 +121,7 @@ namespace FritosCallouts.Callouts
             }
             catch (Exception ex)
             {
-                Game.LogTrivial($"[FritoQC] Error ending HitAndRun callout: {ex.Message}");
+                Game.LogTrivial($"[FritoQC Callouts] Error ending HitAndRun callout: {ex.Message}");
             }
         }
     }
