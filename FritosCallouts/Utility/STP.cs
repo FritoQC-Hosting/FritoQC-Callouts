@@ -1,47 +1,122 @@
 ﻿using Rage;
-using Rage.Native;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Reflection;
 
 namespace FritosCallouts
 {
-    public class STP
+    public static class STP
     {
-        public static void SetPedDrunk(Ped Ped, bool state)
+        private static bool SafeCheck(string action)
         {
-            if (!Main.STP) Game.LogTrivial("StopThePed not installed - Strongly Recommended to install STP");
-            if (Main.Debug_Mode) Game.LogTrivial("STP - Set Drunk");
-            StopThePed.API.Functions.setPedAlcoholOverLimit(Ped, state);
+            if (!Main.STP)
+            {
+                Game.LogTrivial($"[FritoQC] StopThePed not installed, skipping '{action}'.");
+                return false;
+            }
+
+            if (Main.Debug_Mode)
+                Game.LogTrivial($"[FritoQC] STP - {action}");
+
+            return true;
+        }
+        private static Type GetSTPFunctions()
+        {
+            var stpAssembly = AppDomain.CurrentDomain.GetAssemblies()
+                .FirstOrDefault(a => a.GetName().Name == "StopThePed");
+            if (stpAssembly == null) return null;
+
+            return stpAssembly.GetType("StopThePed.API.Functions");
         }
 
-        public static void SetPedUnderDrugInfluence(Ped Ped, bool state)
+        public static void SetPedDrunk(Ped ped, bool state)
         {
-            if (!Main.STP) Game.LogTrivial("StopThePed not installed - Strongly Recommended to install STP");
-            if (Main.Debug_Mode) Game.LogTrivial("STP - Set Drunk");
-            StopThePed.API.Functions.setPedUnderDrugsInfluence(Ped, state);
+            if (!SafeCheck("SetPedDrunk")) return;
+
+            try
+            {
+                var functionsType = GetSTPFunctions();
+                if (functionsType == null) return;
+
+                var method = functionsType.GetMethod("setPedAlcoholOverLimit", BindingFlags.Public | BindingFlags.Static);
+                method?.Invoke(null, new object[] { ped, state });
+            }
+            catch
+            {
+                Game.LogTrivial("[FritoQC] Failed to call SetPedDrunk via StopThePed.");
+            }
         }
 
-        public static void SetVehicleInsurance(Vehicle Veh, StopThePed.API.STPVehicleStatus state)
+        public static void SetPedUnderDrugInfluence(Ped ped, bool state)
         {
-            if (!Main.STP) Game.LogTrivial("StopThePed not installed - Strongly Recommended to install STP");
-            if (Main.Debug_Mode) Game.LogTrivial("STP - Set Drunk");
-            StopThePed.API.Functions.setVehicleInsuranceStatus(Veh, state);
+            if (!SafeCheck("SetPedUnderDrugInfluence")) return;
+
+            try
+            {
+                var functionsType = GetSTPFunctions();
+                if (functionsType == null) return;
+
+                var method = functionsType.GetMethod("setPedUnderDrugsInfluence", BindingFlags.Public | BindingFlags.Static);
+                method?.Invoke(null, new object[] { ped, state });
+            }
+            catch
+            {
+                Game.LogTrivial("[FritoQC] Failed to call SetPedUnderDrugInfluence via StopThePed.");
+            }
         }
 
-        public static void SetVehicleRegistration(Vehicle Veh, StopThePed.API.STPVehicleStatus state)
+        public static void SetVehicleInsurance(Vehicle veh, object stpVehicleStatus)
         {
-            if (!Main.STP) Game.LogTrivial("StopThePed not installed - Strongly Recommended to install STP");
-            if (Main.Debug_Mode) Game.LogTrivial("STP - Set Drunk");
-            StopThePed.API.Functions.setVehicleRegistrationStatus(Veh, state);
+            if (!SafeCheck("SetVehicleInsurance")) return;
+
+            try
+            {
+                var functionsType = GetSTPFunctions();
+                if (functionsType == null) return;
+
+                var method = functionsType.GetMethod("setVehicleInsuranceStatus", BindingFlags.Public | BindingFlags.Static);
+                method?.Invoke(null, new object[] { veh, stpVehicleStatus });
+            }
+            catch
+            {
+                Game.LogTrivial("[FritoQC] Failed to call SetVehicleInsurance via StopThePed.");
+            }
         }
-        public static void InjectPedItems(Ped Ped)
-        {   
-            if (!Main.STP) Game.LogTrivial("StopThePed not installed - Strongly Recommended to install STP");
-            if (Main.Debug_Mode) Game.LogTrivial("STP - InjectPedItems");
-            StopThePed.API.Functions.injectPedSearchItems(Ped);
+
+        public static void SetVehicleRegistration(Vehicle veh, object stpVehicleStatus)
+        {
+            if (!SafeCheck("SetVehicleRegistration")) return;
+
+            try
+            {
+                var functionsType = GetSTPFunctions();
+                if (functionsType == null) return;
+
+                var method = functionsType.GetMethod("setVehicleRegistrationStatus", BindingFlags.Public | BindingFlags.Static);
+                method?.Invoke(null, new object[] { veh, stpVehicleStatus });
+            }
+            catch
+            {
+                Game.LogTrivial("[FritoQC] Failed to call SetVehicleRegistration via StopThePed.");
+            }
+        }
+
+        public static void InjectPedItems(Ped ped)
+        {
+            if (!SafeCheck("InjectPedItems")) return;
+
+            try
+            {
+                var functionsType = GetSTPFunctions();
+                if (functionsType == null) return;
+
+                var method = functionsType.GetMethod("injectPedSearchItems", BindingFlags.Public | BindingFlags.Static);
+                method?.Invoke(null, new object[] { ped });
+            }
+            catch
+            {
+                Game.LogTrivial("[FritoQC] Failed to call InjectPedItems via StopThePed.");
+            }
         }
     }
 }

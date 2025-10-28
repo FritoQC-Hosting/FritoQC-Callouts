@@ -1,21 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Rage;
+﻿using CalloutInterfaceAPI;
+using FritosCallouts.Utility;
 using LSPD_First_Response.Mod.API;
 using LSPD_First_Response.Mod.Callouts;
+using Rage;
+using System;
 using System.Drawing;
-using CalloutInterfaceAPI;
-using FritosCallouts.Utility;
+using CIA = CalloutInterfaceAPI.Functions;
+// Namespace aliases to prevent ambiguity
+using LSPDFR = LSPD_First_Response.Mod.API.Functions;
 
 namespace FritosCallouts.Callouts
 {
-    //[CalloutInfo("HighSpeedChase", CalloutProbability.High)]
-    [CalloutInterface("Hit and Run", CalloutProbability.High, "Hit and run vehicle spotted in the area.", "Code 3", "LSPD")]
-
+    [CalloutInterface(
+        "Hit and Run",
+        CalloutProbability.High,
+        "Hit and run vehicle spotted in the area.",
+        "Code 3",
+        "LSPD"
+    )]
     public class HitAndRun : Callout
     {
-
         private Ped Suspect;
         private Vehicle SuspectVehicle;
         private Blip SuspectBlip;
@@ -28,34 +32,55 @@ namespace FritosCallouts.Callouts
             Spawnpoint = World.GetNextPositionOnStreet(Game.LocalPlayer.Character.Position.Around(800f));
             ShowCalloutAreaBlipBeforeAccepting(Spawnpoint, 30f);
             AddMinimumDistanceCheck(30f, Spawnpoint);
+
             CalloutMessage = "Hit and Run vehicle spotted in the area.";
             CalloutPosition = Spawnpoint;
-            LSPD_First_Response.Mod.API.Functions.PlayScannerAudioUsingPosition("WE_HAVE CRIME_RESISTING_ARREST_02 IN_OR_ON_POSITION", Spawnpoint);
+
+            LSPDFR.PlayScannerAudioUsingPosition(
+                "WE_HAVE CRIME_RESISTING_ARREST_02 IN_OR_ON_POSITION",
+                Spawnpoint
+            );
 
             return base.OnBeforeCalloutDisplayed();
         }
 
         public override bool OnCalloutAccepted()
         {
-            SuspectVehicle = new Vehicle(FritosUtils.GetRandomVehicleModel(), Spawnpoint);
-            SuspectVehicle.IsPersistent = true;
-            STP.SetVehicleInsurance(SuspectVehicle, StopThePed.API.STPVehicleStatus.None);
+            try
+            {
+                SuspectVehicle = new Vehicle(FritosUtils.GetRandomVehicleModel(), Spawnpoint)
+                {
+                    IsPersistent = true
+                };
 
-            Suspect = new Ped(SuspectVehicle.GetOffsetPositionFront(5f));
-            Suspect.IsPersistent = true;
-            Suspect.BlockPermanentEvents = true;
-            Suspect.WarpIntoVehicle(SuspectVehicle, -1);
-            STP.SetPedDrunk(Suspect, true);
+                STP.SetVehicleInsurance(SuspectVehicle, "None");
 
-            SuspectBlip = Suspect.AttachBlip();
-            SuspectBlip.Color = System.Drawing.Color.Red;
-            SuspectBlip.IsRouteEnabled = false;
+                Suspect = new Ped(SuspectVehicle.GetOffsetPositionFront(5f))
+                {
+                    IsPersistent = true,
+                    BlockPermanentEvents = true
+                };
+                Suspect.WarpIntoVehicle(SuspectVehicle, -1);
 
-            PursuitCreated = false;
+                STP.SetPedDrunk(Suspect, true);
 
-            CalloutInterfaceAPI.Functions.SendMessage(this, $"Vehicle is a {CalloutInterfaceAPI.Functions.GetColorName(SuspectVehicle.PrimaryColor)} on {CalloutInterfaceAPI.Functions.GetColorName(SuspectVehicle.SecondaryColor)} {SuspectVehicle.Model.Name}");
+                SuspectBlip = Suspect.AttachBlip();
+                SuspectBlip.Color = Color.Red;
+                SuspectBlip.IsRouteEnabled = false;
 
-            //TODO- Dommager le vehicle un peu
+                PursuitCreated = false;
+
+                CIA.SendMessage(
+                    this,
+                    $"Vehicle is a {CIA.GetColorName(SuspectVehicle.PrimaryColor)} on {CIA.GetColorName(SuspectVehicle.SecondaryColor)} {SuspectVehicle.Model.Name}"
+                );
+            }
+            catch (Exception ex)
+            {
+                Game.LogTrivial($"[FritoQC] Error initializing HitAndRun callout: {ex}");
+                End();
+                return false;
+            }
 
             return base.OnCalloutAccepted();
         }
@@ -64,41 +89,40 @@ namespace FritosCallouts.Callouts
         {
             base.Process();
 
-            if (!PursuitCreated && Game.LocalPlayer.Character.DistanceTo(SuspectVehicle) <= 200f)
+            try
             {
-                Pursuit = LSPD_First_Response.Mod.API.Functions.CreatePursuit();
-                LSPD_First_Response.Mod.API.Functions.AddPedToPursuit(Pursuit, Suspect);
-                LSPD_First_Response.Mod.API.Functions.SetPursuitIsActiveForPlayer(Pursuit, true);
-                PursuitCreated = true;
-            }
+                if (!PursuitCreated && Game.LocalPlayer.Character.DistanceTo(SuspectVehicle) <= 200f)
+                {
+                    Pursuit = LSPDFR.CreatePursuit();
+                    LSPDFR.AddPedToPursuit(Pursuit, Suspect);
+                    LSPDFR.SetPursuitIsActiveForPlayer(Pursuit, true);
+                    PursuitCreated = true;
+                }
 
-            if (PursuitCreated && !LSPD_First_Response.Mod.API.Functions.IsPursuitStillRunning(Pursuit))
+                if (PursuitCreated && !LSPDFR.IsPursuitStillRunning(Pursuit))
+                    End();
+            }
+            catch (Exception ex)
             {
-                End();
+                Game.LogTrivial($"[FritoQC] Error in HitAndRun.Process(): {ex.Message}");
             }
-
         }
 
         public override void End()
         {
             base.End();
 
-            if (Suspect.Exists())
+            try
             {
-                //Suspect.Dismiss();
-            }
-            if (Suspect.Exists())
-            {
-                SuspectBlip.Delete();
-            }
-            if (SuspectVehicle.Exists())
-            {
-                SuspectVehicle.Dismiss();
-            }
+                if (Suspect.Exists()) SuspectBlip?.Delete();
+                if (SuspectVehicle.Exists()) SuspectVehicle.Dismiss();
 
-            Game.LogTrivial("FritoQC Callouts | High Speed Chase Ended");
-
+                Game.LogTrivial("[FritoQC Callouts] Hit and Run ended.");
+            }
+            catch (Exception ex)
+            {
+                Game.LogTrivial($"[FritoQC] Error ending HitAndRun callout: {ex.Message}");
+            }
         }
-
     }
 }
