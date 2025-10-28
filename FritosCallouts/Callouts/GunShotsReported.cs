@@ -77,7 +77,7 @@ namespace FritosCallouts.Callouts
                 SuspectBlip.Delete();
             }
 
-            Game.LogTrivial("FritoQC Callouts | GunShots Reported Ended");
+            Game.LogTrivial("[FritoQC Callouts] GunShots Reported Ended");
 
         }
 

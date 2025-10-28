@@ -97,7 +97,7 @@ namespace FritosCallouts.Callouts
                     }
                     if (counter == 5)
                     {
-                        Game.DisplaySubtitle("Officer: It's not legal to be intoxicated in public, Im going to have to write you a citation.");
+                        Game.DisplaySubtitle("Officer: It's not legal to be intoxicated in public, I'm going to have to write you a citation.");
                         Suspect.Tasks.PlayAnimation(new AnimationDictionary("amb@world_human_drinking@beer@male@exit"), "exit", 5f, AnimationFlags.None); //Clearing task
                     }
                     if (counter == 6)
@@ -135,7 +135,7 @@ namespace FritosCallouts.Callouts
                 SuspectBlip.Delete();
             }
 
-            Game.LogTrivial("FritoQC Callouts | Intoxicated Person Ended");
+            Game.LogTrivial("[FritoQC Callouts] Intoxicated Person Ended");
 
         }
     }

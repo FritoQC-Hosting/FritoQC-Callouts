@@ -65,7 +65,7 @@ namespace FritosCallouts.Callouts
 
             if (Game.LocalPlayer.Character.DistanceTo(Suspect1) <= 200f && !Notified)
             {
-                CalloutInterfaceAPI.Functions.SendMessage(this, "Let dispatch know when to end callout !");
+                CalloutInterfaceAPI.Functions.SendMessage(this, "Let dispatch know when to end callout!");
                 Notified = true;
             }
 
