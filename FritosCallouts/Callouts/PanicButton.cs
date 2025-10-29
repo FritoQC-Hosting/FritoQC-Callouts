@@ -12,7 +12,7 @@ using FritosCallouts.Utility;
 namespace FritosCallouts.Callouts
 {
     //[CalloutInfo("PanicButton", CalloutProbability.Low)]
-    [CalloutInterface("[FQ] Panic button pressed", CalloutProbability.Low, "Officer in distress", "Code 3", "LSPD")]
+    [CalloutInterface("[FQ] Panic Button", CalloutProbability.Low, "Officer in distress", "Code 3", "LSPD")]
     
     public class PanicButton : Callout
     {
