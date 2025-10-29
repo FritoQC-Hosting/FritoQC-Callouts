@@ -116,7 +116,7 @@ namespace FritosCallouts.Callouts
             if (SuspectPed.Exists()) { SuspectPed.Dismiss(); }
             if (SuspectBlip.Exists()) { SuspectBlip.Delete(); }
 
-            Game.LogTrivial("FC | Panic Button Ended");
+            Game.LogTrivial("[FritoQC Callouts] Panic Button Ended");
 
         }
 
