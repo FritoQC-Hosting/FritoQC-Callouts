@@ -22,7 +22,6 @@ namespace FritosCallouts
 
         public override void Initialize()
         {
-            Game.LogTrivial("[FritoQC Callouts] Plugin initialized. Waiting for OnDuty...");
             Functions.OnOnDutyStateChanged += OnOnDutyStateChangedHandler;
         }
 
