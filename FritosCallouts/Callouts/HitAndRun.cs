@@ -16,7 +16,7 @@ namespace FritosCallouts.Callouts
         CalloutProbability.High,
         "Hit and run vehicle spotted in the area.",
         "Code 3",
-        "LSPD"
+        ""
     )]
     public class HitAndRun : Callout
     {

@@ -9,7 +9,7 @@ using CalloutInterfaceAPI;
 namespace FritosCallouts.Callouts
 {
     //[CalloutInfo("GunShotsReported", CalloutProbability.High)]
-    [CalloutInterface("[FQ] Gunshots Reported", CalloutProbability.High, "Firearm discharged in the area.", "Code 3", "LSPD")]
+    [CalloutInterface("[FQ] Gunshots Reported", CalloutProbability.High, "Firearm discharged in the area.", "Code 3", "")]
 
 
     class GunShotsReported : Callout
