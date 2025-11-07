@@ -1,5 +1,0 @@
-To install, copy everything from the 'Grand Theft Auto V' folder into your main GTAV one.
-
-Please report all issue or make suggestions:
-- in the issues tab of the GitHub page of the plugin: https://github.com/FritoQC-Hosting/FritoQC-Callouts/issues
-- in the comments of the LCPDFR.com page of the plugin: https://www.lcpdfr.com/downloads/gta5mods/scripts/36706-fritoqc-callouts/?tab=comments
