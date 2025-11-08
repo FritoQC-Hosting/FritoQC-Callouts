@@ -25,7 +25,6 @@ namespace FritosCallouts.Callouts
 
         public override bool OnBeforeCalloutDisplayed()
         {
-            Game.LogTrivialDebug("FIGHT IN PROGRESS BEFORE CALLOUT DISPLAYED");
             //Spawnpoint = World.GetRandomPositionOnStreet();
             Spawnpoint = World.GetNextPositionOnStreet(Game.LocalPlayer.Character.Position.Around(800f));
             ShowCalloutAreaBlipBeforeAccepting(Spawnpoint, 15f);
