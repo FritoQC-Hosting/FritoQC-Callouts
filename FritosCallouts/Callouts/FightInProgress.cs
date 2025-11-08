@@ -32,7 +32,7 @@ namespace FritosCallouts.Callouts
             AddMinimumDistanceCheck(30f, Spawnpoint);
             CalloutMessage = "2 Individuals reported fighting in public";
             CalloutPosition = Spawnpoint;
-            LSPD_First_Response.Mod.API.Functions.PlayScannerAudioUsingPosition("ATTENTION_ALL_UNITS_01 WE_HAVE CRIME_GUNFIRE_02 IN_OR_ON_POSITION UNITS_RESPOND_CODE_03_01", Spawnpoint);
+            LSPD_First_Response.Mod.API.Functions.PlayScannerAudioUsingPosition("ATTENTION_ALL_UNITS_01 WE_HAVE CRIME_DISTURBING_THE_PEACE_01 IN_OR_ON_POSITION UNITS_RESPOND_CODE_03_01", Spawnpoint);
 
             return base.OnBeforeCalloutDisplayed();
         }
