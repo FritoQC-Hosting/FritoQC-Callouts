@@ -77,11 +77,27 @@ namespace FritosCallouts.Callouts
                 Suspect2.Tasks.FightAgainst(Suspect1);
                 Fighting = true;
             }
+
+            if (Suspect1.IsDead && SuspectBlip1.Exists())
+            {
+                SuspectBlip1.Delete();
+            }
+            if (Suspect2.IsDead && SuspectBlip2.Exists())
+            {
+                SuspectBlip2.Delete();
+            }
+
+            if ((FritosUtils.IsSuspectDone(Suspect1) && FritosUtils.IsSuspectDone(Suspect2)) || Game.LocalPlayer.IsDead)
+            {
+                End();
+            }
         }
 
         public override void End()
         {
             base.End();
+
+            Game.DisplayNotification("Code 4");
 
             if (Suspect1.Exists() && Suspect2.Exists())
             {
