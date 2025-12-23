@@ -36,6 +36,7 @@ namespace FritosCallouts.Callouts
 
         public override bool OnCalloutAccepted()
         {
+            SuspectOne = new Ped("player_zero", new Vector3(-632.1973f, -236.8982f, 38.04816f), 140.5453f);
 
 
             return base.OnCalloutAccepted();

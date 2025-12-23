@@ -122,6 +122,7 @@ namespace FritosCallouts
             if (Config.IntoxicatedIndividual) Functions.RegisterCallout(typeof(Callouts.IntoxicatedIndividual));
             if (Config.PanicButton) Functions.RegisterCallout(typeof(Callouts.PanicButton));
             if (Config.FightInProgress) Functions.RegisterCallout(typeof(Callouts.FightInProgress));
+            if (Config.JewelleryRobbery) Functions.RegisterCallout(typeof(Callouts.FightInProgress));
 
             Game.LogTrivial("[FritoQC Callouts] Finished registering callouts.");
 

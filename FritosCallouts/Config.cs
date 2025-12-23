@@ -1,4 +1,5 @@
-﻿using Rage;
+﻿using FritosCallouts.Callouts;
+using Rage;
 using System.IO;
 using System.Linq;
 
@@ -16,6 +17,7 @@ namespace FritosCallouts
         public static bool HitAndRun;
         public static bool IntoxicatedIndividual;
         public static bool PanicButton;
+        public static bool JewelleryRobbery;
 
         static Config()
         {
@@ -37,6 +39,7 @@ namespace FritosCallouts
                 INIFile.Write("Callouts", "Hit and Run", "true");
                 INIFile.Write("Callouts", "Intoxicated Individual", "true");
                 INIFile.Write("Callouts", "Panic Button", "true");
+                INIFile.Write("Callouts", "Jewellery Robbery", "true");
 
                 Game.LogTrivial("[FritoQC Callouts] Created configuration file with defaults.");
                 CreatedDefault = true;
@@ -50,6 +53,7 @@ namespace FritosCallouts
                 WriteIfMissing("Callouts", "Hit and Run", "true");
                 WriteIfMissing("Callouts", "Intoxicated Individual", "true");
                 WriteIfMissing("Callouts", "Panic Button", "true");
+                WriteIfMissing("Callouts", "Jewellery Robbery", "true");
             }
 
             // --- Read values after setup ---
@@ -59,6 +63,7 @@ namespace FritosCallouts
             HitAndRun = SafeReadBool("Callouts", "Hit and Run", true);
             IntoxicatedIndividual = SafeReadBool("Callouts", "Intoxicated Individual", true);
             PanicButton = SafeReadBool("Callouts", "Panic Button", true);
+            JewelleryRobbery = SafeReadBool("Callouts", "Jewellery Robbery", true);
         }
 
         private static void WriteIfMissing(string section, string key, string value)
