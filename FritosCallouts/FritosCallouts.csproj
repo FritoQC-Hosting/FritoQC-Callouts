@@ -60,6 +60,7 @@
     <Compile Include="Callouts\GunShotsReported.cs" />
     <Compile Include="Callouts\HitAndRun.cs" />
     <Compile Include="Callouts\IntoxicatedIndividual.cs" />
+    <Compile Include="Callouts\JewelleryRobbery.cs" />
     <Compile Include="Callouts\PanicButton.cs" />
     <Compile Include="Utility\FritosUtils.cs" />
     <Compile Include="Utility\STP.cs" />
