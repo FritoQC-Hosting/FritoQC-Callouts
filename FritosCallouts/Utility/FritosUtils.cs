@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Rage;
+using System;
 using System.Collections.Generic;
 
 namespace FritosCallouts.Utility
@@ -37,6 +38,11 @@ namespace FritosCallouts.Utility
 
             // Return a random vehicle model
             return VehicleModels[Random.Next(VehicleModels.Count)];
+        }
+
+        public static bool IsSuspectDone(Ped suspect)
+        {
+            return suspect.Exists() && (suspect.IsDead || suspect.IsCuffed);
         }
     }
 }
