@@ -5,6 +5,8 @@ using Rage;
 using LSPD_First_Response.Mod.API;
 using LSPD_First_Response.Mod.Callouts;
 using CalloutInterfaceAPI;
+using LSPDFR = LSPD_First_Response.Mod.API.Functions;
+using CIA = CalloutInterfaceAPI.Functions;
 
 namespace FritosCallouts.Callouts
 {
@@ -52,6 +54,13 @@ namespace FritosCallouts.Callouts
         public override void Process()
         {
             base.Process();
+
+            if (Game.LocalPlayer.Character.DistanceTo(Suspect) <= 100f)
+            {
+                CIA.SendMessage(this, "Dispatching an extra unit to the location");
+                LSPDFR.RequestBackup(Spawnpoint, LSPD_First_Response.EBackupResponseType.Code3, LSPD_First_Response.EBackupUnitType.LocalUnit);
+            }
+
             if (Game.LocalPlayer.Character.DistanceTo(Suspect) <= 30f)
             {
                 Suspect.Tasks.FightAgainst(Game.LocalPlayer.Character);
