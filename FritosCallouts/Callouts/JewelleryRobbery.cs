@@ -27,11 +27,6 @@ namespace FritosCallouts.Callouts
 
         public override bool OnBeforeCalloutDisplayed()
         {
-            if (Main.Debug_Mode)
-            {
-                Game.DisplayNotification($"~b~[FQ Debug] ~w~JewelleryRobbery Callout Triggered");
-                Game.LogTrivial($"[FQ Debug] JewelleryRobbery Callout Triggered");
-            }
             ShowCalloutAreaBlipBeforeAccepting(SceneLocation, 10f);
             AddMinimumDistanceCheck(10f, SceneLocation);
             CalloutMessage = "Jewellery Robbery in progress.";
