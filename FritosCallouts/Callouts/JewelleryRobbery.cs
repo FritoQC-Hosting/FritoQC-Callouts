@@ -81,13 +81,8 @@ namespace FritosCallouts.Callouts
                         if (_suspects[i].Exists() && _bikes[i].Exists())
                         {
                             _suspects[i].GiveHelmet(false, HelmetTypes.RegularMotorcycleHelmet, 0);
-                            _suspects[i].CanRagdoll = false;
-                            _suspects[i].CanBeKnockedOffBikes = false;
                             _suspects[i].WarpIntoVehicle(_bikes[i], -1);
-                            _suspects[i].Tasks.DriveToPosition(_bikes[i], new Vector3(-693.1359f, -223.8621f, 36.98104f), 10f, VehicleDrivingFlags.Emergency, 10f).WaitForCompletion(5);
                             LSPDFR.AddPedToPursuit(Pursuit, _suspects[i]);
-                            _suspects[i].CanRagdoll = true;
-                            _suspects[i].CanBeKnockedOffBikes = true;
                         }
                     }
                     LSPDFR.SetPursuitIsActiveForPlayer(Pursuit, true);
