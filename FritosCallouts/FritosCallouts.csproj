@@ -7,7 +7,7 @@
     <ProjectGuid>{F5C57531-F3B9-438B-BBCE-4311E4822807}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FritosCallouts</RootNamespace>
+    <RootNamespace>FritoQCCallouts</RootNamespace>
     <AssemblyName>FritoQCCallouts</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

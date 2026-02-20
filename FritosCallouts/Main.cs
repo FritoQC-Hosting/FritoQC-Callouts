@@ -7,7 +7,7 @@ using Rage;
 using LSPD_First_Response.Mod.API;
 using LSPD_First_Response.Mod.Callouts;
 
-namespace FritosCallouts
+namespace FritoQCCallouts
 {
     public class Main : Plugin
     {

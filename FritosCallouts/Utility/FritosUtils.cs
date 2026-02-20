@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace FritosCallouts.Utility
+namespace FritoQCCallouts.Utility
 {
     internal static class FritosUtils
     {

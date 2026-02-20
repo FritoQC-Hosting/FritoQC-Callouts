@@ -2,7 +2,7 @@
 using System.IO;
 using System.Linq;
 
-namespace FritosCallouts
+namespace FritoQCCallouts
 {
     internal static class Config
     {

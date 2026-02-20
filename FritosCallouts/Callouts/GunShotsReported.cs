@@ -6,7 +6,7 @@ using LSPD_First_Response.Mod.API;
 using LSPD_First_Response.Mod.Callouts;
 using CalloutInterfaceAPI;
 
-namespace FritosCallouts.Callouts
+namespace FritoQCCallouts.Callouts
 {
     //[CalloutInfo("GunShotsReported", CalloutProbability.High)]
     [CalloutInterface("[FQ] Gunshots Reported", CalloutProbability.High, "Firearm discharged in the area.", "Code 3", "")]

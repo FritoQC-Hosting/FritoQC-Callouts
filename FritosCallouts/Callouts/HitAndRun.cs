@@ -1,5 +1,5 @@
 ﻿using CalloutInterfaceAPI;
-using FritosCallouts.Utility;
+using FritoQCCallouts.Utility;
 using LSPD_First_Response.Mod.API;
 using LSPD_First_Response.Mod.Callouts;
 using Rage;
@@ -9,7 +9,7 @@ using CIA = CalloutInterfaceAPI.Functions;
 // Namespace aliases to prevent ambiguity
 using LSPDFR = LSPD_First_Response.Mod.API.Functions;
 
-namespace FritosCallouts.Callouts
+namespace FritoQCCallouts.Callouts
 {
     [CalloutInterface(
         "[FQ] Hit and Run",

@@ -5,9 +5,9 @@ using Rage;
 using LSPD_First_Response.Mod.API;
 using LSPD_First_Response.Mod.Callouts;
 using CalloutInterfaceAPI;
-using FritosCallouts.Utility;
+using FritoQCCallouts.Utility;
 
-namespace FritosCallouts.Callouts
+namespace FritoQCCallouts.Callouts
 {
     //[CalloutInfo("GunShotsReported", CalloutProbability.High)]
     [CalloutInterface("[FQ] Fight In Progress", CalloutProbability.Medium, "2 Individuals fighting", "Code 3", "")]

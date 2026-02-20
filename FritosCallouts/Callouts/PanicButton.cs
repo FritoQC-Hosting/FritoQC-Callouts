@@ -7,9 +7,9 @@ using System.Drawing;
 using System.Threading;
 using CalloutInterfaceAPI;
 using LSPD_First_Response.Mod.Callouts;
-using FritosCallouts.Utility;
+using FritoQCCallouts.Utility;
 
-namespace FritosCallouts.Callouts
+namespace FritoQCCallouts.Callouts
 {
     //[CalloutInfo("PanicButton", CalloutProbability.Low)]
     [CalloutInterface("[FQ] Panic Button", CalloutProbability.Low, "Officer in distress", "Code 99", "")]

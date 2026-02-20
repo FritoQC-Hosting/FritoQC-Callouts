@@ -3,7 +3,7 @@ using System;
 using System.Linq;
 using System.Reflection;
 
-namespace FritosCallouts
+namespace FritoQCCallouts
 {
     public static class STP
     {
