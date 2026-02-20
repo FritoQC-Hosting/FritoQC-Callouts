@@ -22,6 +22,7 @@ namespace FritoQCCallouts.Callouts
         private Blip SuspectBlip2;
         private Vector3 Spawnpoint;
         private bool Notified;
+        private bool Fighting = false;
 
         public override bool OnBeforeCalloutDisplayed()
         {
@@ -40,19 +41,21 @@ namespace FritoQCCallouts.Callouts
         {
             Suspect1 = new Ped(Spawnpoint);
             Suspect1.IsPersistent = true;
-            Suspect1.BlockPermanentEvents = true;
+            //Suspect1.BlockPermanentEvents = true;
 
             Suspect2 = new Ped(Spawnpoint);
             Suspect2.IsPersistent = true;
-            Suspect2.BlockPermanentEvents = true;
+            //Suspect2.BlockPermanentEvents = true;
             STP.SetPedDrunk(Suspect2, true);
 
             SuspectBlip1 = Suspect1.AttachBlip();
             SuspectBlip1.Color = System.Drawing.Color.Red;
+            SuspectBlip1.Scale = 0.5f;
             SuspectBlip1.IsRouteEnabled = false;
 
             SuspectBlip2 = Suspect2.AttachBlip();
-            SuspectBlip2.Color = System.Drawing.Color.DarkRed;
+            SuspectBlip2.Color = System.Drawing.Color.Red;
+            SuspectBlip2.Scale = 0.5f;
             SuspectBlip2.IsRouteEnabled = false;
 
             return base.OnCalloutAccepted();
@@ -68,10 +71,25 @@ namespace FritoQCCallouts.Callouts
                 Notified = true;
             }
 
-            if (Game.LocalPlayer.Character.DistanceTo(Suspect1) <= 50f)
+            if (Game.LocalPlayer.Character.DistanceTo(Suspect1) <= 50f && !Fighting)
             {
                 Suspect1.Tasks.FightAgainst(Suspect2);
                 Suspect2.Tasks.FightAgainst(Suspect1);
+                Fighting = true;
+            }
+
+            if (Suspect1.IsDead && SuspectBlip1.Exists())
+            {
+                SuspectBlip1.Delete();
+            }
+            if (Suspect2.IsDead && SuspectBlip2.Exists())
+            {
+                SuspectBlip2.Delete();
+            }
+
+            if ((FritosUtils.IsSuspectDone(Suspect1) && FritosUtils.IsSuspectDone(Suspect2)) || Game.LocalPlayer.IsDead)
+            {
+                End();
             }
         }
 
@@ -79,13 +97,18 @@ namespace FritoQCCallouts.Callouts
         {
             base.End();
 
+            Game.DisplayNotification("Code 4");
+
             if (Suspect1.Exists() && Suspect2.Exists())
             {
                 Suspect1.Dismiss();
                 Suspect2.Dismiss();
+            }
 
-                Suspect1.Delete();
-                Suspect2.Delete();
+            if (SuspectBlip1.Exists() && SuspectBlip2.Exists())
+            {
+                SuspectBlip1.Delete();
+                SuspectBlip2.Delete();
             }
         }
 
