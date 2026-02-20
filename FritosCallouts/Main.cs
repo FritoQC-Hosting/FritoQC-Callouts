@@ -18,7 +18,6 @@ namespace FritoQCCallouts
         public static bool CalloutInterface;
         public static bool UpToDate;
         public static bool Beta = false;
-        public static bool Debug_Mode = Config.DebugMode;
 
         public override void Initialize()
         {

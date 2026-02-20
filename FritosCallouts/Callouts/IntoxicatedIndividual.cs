@@ -47,15 +47,14 @@ namespace FritoQCCallouts.Callouts
             SuspectBlip.Color = System.Drawing.Color.Blue;
             SuspectBlip.IsRouteEnabled = true;
 
-
             Suspect.Tasks.PlayAnimation(new AnimationDictionary("amb@world_human_drinking@beer@male@enter"), "enter", 5f, AnimationFlags.StayInEndFrame).WaitForStatus(TaskStatus.NoTask, 3500); //Starting task
 
             Suspect.Tasks.PlayAnimation(new AnimationDictionary("amb@world_human_drinking@beer@male@base"), "base", 5f, AnimationFlags.Loop);
 
-
-            if (Main.Debug_Mode) Game.LogTrivial("Suspect spawned");
-
-            if (Main.STP) STP.SetPedDrunk(Suspect, true); else if (Main.Debug_Mode) Game.LogTrivial("Native - Set Drunk"); NativeFunction.Natives.SET_PED_IS_DRUNK(Suspect, true);
+            if (Main.STP) 
+                STP.SetPedDrunk(Suspect, true); 
+            else 
+                NativeFunction.Natives.SET_PED_IS_DRUNK(Suspect, true);
 
             if (Suspect.IsMale)
                 maleFemale = "sir";
@@ -109,7 +108,6 @@ namespace FritoQCCallouts.Callouts
                     {
                         Game.DisplaySubtitle("Conversation Over");
                     }
-                    Game.LogTrivial("End of Conversation");
                 }
                 
             }

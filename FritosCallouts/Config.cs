@@ -11,7 +11,6 @@ namespace FritoQCCallouts
         public static InitializationFile INIFile = new InitializationFile(FilePath);
         public static bool CreatedDefault = false;
 
-        public static bool DebugMode;
         public static bool FightInProgress;
         public static bool GunShotsReported;
         public static bool HitAndRun;
@@ -30,9 +29,6 @@ namespace FritoQCCallouts
                 INIFile.Create();
                 INIFile = new InitializationFile(FilePath);
 
-                // --- General ---
-                INIFile.Write("General", "Debug Mode", "false");
-
                 // --- Callouts ---
                 INIFile.Write("Callouts", "Fight In Progress", "true");
                 INIFile.Write("Callouts", "Gunshots Reported", "true");
@@ -47,7 +43,6 @@ namespace FritoQCCallouts
             else
             {
                 // Repair missing keys silently
-                WriteIfMissing("General", "Debug Mode", "false");
                 WriteIfMissing("Callouts", "Fight In Progress", "true");
                 WriteIfMissing("Callouts", "Gunshots Reported", "true");
                 WriteIfMissing("Callouts", "Hit and Run", "true");
@@ -57,7 +52,6 @@ namespace FritoQCCallouts
             }
 
             // --- Read values after setup ---
-            DebugMode = SafeReadBool("General", "Debug Mode", false);
             FightInProgress = SafeReadBool("Callouts", "Fight In Progress", true);
             GunShotsReported = SafeReadBool("Callouts", "Gunshots Reported", true);
             HitAndRun = SafeReadBool("Callouts", "Hit and Run", true);
