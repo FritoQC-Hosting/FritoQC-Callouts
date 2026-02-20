@@ -9,7 +9,6 @@ using System;
 using System.Drawing;
 using System.Security.Policy;
 using CIA = CalloutInterfaceAPI.Functions;
-// Namespace aliases to prevent ambiguity
 using LSPDFR = LSPD_First_Response.Mod.API.Functions;
 
 namespace FritosCallouts.Callouts
@@ -48,9 +47,9 @@ namespace FritosCallouts.Callouts
             _suspects[2] = new Ped(new Vector3(-632.1973f, -236.8982f, 38.04816f), 140.5453f);
             
             _bikes = new Vehicle[3];
-            _bikes[0] = new Vehicle("sanchez", new Vector3(-636.9227f, -236.1809f, 37.36633f), 54.26329f);
-            _bikes[1] = new Vehicle("sanchez2", new Vector3(-638.1968f, -241.4963f, 37.56949f), 42.1154f);
-            _bikes[2] = new Vehicle("sanchez", new Vector3(-634.3521f, -240.5563f, 37.54824f), 62.36589f);
+            _bikes[0] = new Vehicle("bati2", new Vector3(-636.9227f, -236.1809f, 37.36633f), 54.26329f);
+            _bikes[1] = new Vehicle("bati", new Vector3(-638.1968f, -241.4963f, 37.56949f), 42.1154f);
+            _bikes[2] = new Vehicle("bati", new Vector3(-634.3521f, -240.5563f, 37.54824f), 62.36589f);
 
             Sceneblip = new Blip(SceneLocation, 30f);
             Sceneblip.Color = Color.Yellow;
@@ -72,23 +71,18 @@ namespace FritosCallouts.Callouts
 
             try
             {
-                if (!PursuitCreated && Game.LocalPlayer.Character.DistanceTo(SceneLocation) <= 100f)
+                if (!PursuitCreated && Game.LocalPlayer.Character.DistanceTo(SceneLocation) <= 150f)
                 {
                     Pursuit = LSPDFR.CreatePursuit();
                     PursuitCreated = true;
 
                     for (int i = 0; i < _suspects.Length; i++)
                     {
-                        if (_suspects[i] && _suspects[i].Exists() && _bikes[i] && _bikes[i].Exists())
+                        if (_suspects[i].Exists() && _bikes[i].Exists())
                         {
                             _suspects[i].GiveHelmet(false, HelmetTypes.RegularMotorcycleHelmet, 0);
-                            _suspects[i].CanRagdoll = false;
-                            _suspects[i].CanBeKnockedOffBikes = false;
                             _suspects[i].WarpIntoVehicle(_bikes[i], -1);
-                            _suspects[i].Tasks.DriveToPosition(_bikes[i], new Vector3(-693.1359f, -223.8621f, 36.98104f), 10f, VehicleDrivingFlags.Emergency, 10f).WaitForCompletion(5);
                             LSPDFR.AddPedToPursuit(Pursuit, _suspects[i]);
-                            _suspects[i].CanRagdoll = true;
-                            _suspects[i].CanBeKnockedOffBikes = true;
                         }
                     }
                     LSPDFR.SetPursuitIsActiveForPlayer(Pursuit, true);
@@ -113,7 +107,7 @@ namespace FritosCallouts.Callouts
             base.End();
             try
             {
-                Game.DisplayNotification("Code 4")
+                Game.DisplayNotification("Code 4");
                 foreach (Ped suspect in _suspects)
                 {
                     if (suspect.Exists()) suspect.Dismiss();
